@@ -1,0 +1,38 @@
+<h2>Show Style</h2>
+
+<ul>
+
+  <li>
+    <strong>Styleid:</strong>
+    <%= @style.styleId %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @style.name %>
+  </li>
+
+  <li>
+    <strong>Ibumin:</strong>
+    <%= @style.ibuMin %>
+  </li>
+
+  <li>
+    <strong>Ibumax:</strong>
+    <%= @style.ibuMax %>
+  </li>
+
+  <li>
+    <strong>Abvmin:</strong>
+    <%= @style.abvMin %>
+  </li>
+
+  <li>
+    <strong>Abvmax:</strong>
+    <%= @style.abvMax %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: style_path(@conn, :edit, @style) %></span>
+<span><%= link "Back", to: style_path(@conn, :index) %></span>

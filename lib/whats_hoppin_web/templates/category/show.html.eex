@@ -1,0 +1,23 @@
+<h2>Show Category</h2>
+
+<ul>
+
+  <li>
+    <strong>Categoryid:</strong>
+    <%= @category.categoryId %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @category.name %>
+  </li>
+
+  <li>
+    <strong>Desc:</strong>
+    <%= @category.desc %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: category_path(@conn, :edit, @category) %></span>
+<span><%= link "Back", to: category_path(@conn, :index) %></span>

@@ -7,7 +7,59 @@ use Mix.Config
 
 # General application configuration
 config :whats_hoppin,
-  ecto_repos: [WhatsHoppin.Repo]
+  ecto_repos: [WhatsHoppin.Repo],
+  states: [
+		'Alabama',
+		'Alaska',
+		'Arizona',
+		'Arkansas',
+		'California',
+		'Colorado',
+		'Connecticut',
+		'Delaware',
+		'Florida',
+		'Georgia',
+		'Hawaii',
+		'Idaho', 
+		'Illinois',
+		'Indiana',
+		'Iowa',
+		'Kansas',
+		'Kentucky',
+		'Louisiana',
+		'Maine',
+		'Maryland',
+		'Massachusetts',
+		'Michigan',
+		'Minnesota',
+		'Mississippi',
+		'Missouri',
+		'Montana',
+		'Nebraska',
+		'Nevada',
+		'New%20Hampshire',
+		'New%20Jersey',
+		'New%20Mexico',
+		'New%20York',
+		'North%20Carolina',
+		'North%20Dakota',
+		'Ohio',
+		'Oklahoma',
+		'Oregon',
+		'Pennsylvania',
+		'Rhode%20Island',
+		'South%20Carolina',
+		'South%20Dakota',
+		'Tennessee',
+		'Texas',
+		'Utah',
+		'Vermont',
+		'Virginia',
+		'Washington',
+		'West%20Virginia',
+		'Wisconsin',
+		'Wyoming'
+	]
 
 # Configures the endpoint
 config :whats_hoppin, WhatsHoppinWeb.Endpoint,
@@ -25,3 +77,4 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+import_config "secret.exs"

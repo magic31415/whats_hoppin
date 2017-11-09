@@ -1,0 +1,40 @@
+<h2>Listing Breweries</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Website</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Established data</th>
+      <th>Is mass owned?</th>
+      <th>Location type</th>
+      <th>Brewery</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for brewery <- @breweries do %>
+    <tr>
+      <td><%= brewery.name %></td>
+      <td><%= brewery.website %></td>
+      <td><%= brewery.city %></td>
+      <td><%= brewery.state %></td>
+      <td><%= brewery.established_data %></td>
+      <td><%= brewery.is_mass_owned? %></td>
+      <td><%= brewery.location_type %></td>
+      <td><%= brewery.brewery_id %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: brewery_path(@conn, :show, brewery), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: brewery_path(@conn, :edit, brewery), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: brewery_path(@conn, :delete, brewery), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Brewery", to: brewery_path(@conn, :new) %></span>
