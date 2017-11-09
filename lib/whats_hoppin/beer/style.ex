@@ -12,6 +12,7 @@ defmodule WhatsHoppin.Beer.Style do
     field :name, :string
     field :styleId, :integer
     field :category_id, :integer
+    field :desc, :string
 
     # belongs_to :category, WhatsHoppin.Beer.Style, foreign_key: :category_id
 
@@ -21,7 +22,7 @@ defmodule WhatsHoppin.Beer.Style do
   @doc false
   def changeset(%Style{} = style, attrs) do
     style
-    |> cast(attrs, [:styleId, :name, :ibuMin, :ibuMax, :abvMin, :abvMax])
-    |> validate_required([:styleId, :name, :ibuMin, :ibuMax, :abvMin, :abvMax])
+    |> cast(attrs, [:styleId, :name, :ibuMin, :ibuMax, :abvMin, :abvMax, :category_id, :desc])
+    |> validate_required([:styleId, :name, :ibuMin, :ibuMax, :abvMin, :abvMax, :category_id, :desc])
   end
 end
