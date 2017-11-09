@@ -5,7 +5,7 @@ defmodule WhatsHoppin.Beer.Category do
 
 
   schema "categories" do
-    field :categoryId, :integer
+    field :category_id, :integer
     field :desc, :string
     field :name, :string
     has_many :styles, WhatsHoppin.Beer.Style, foreign_key: :category_id

@@ -11,8 +11,9 @@ defmodule WhatsHoppin.Beer.Style do
     field :ibuMin, :string
     field :name, :string
     field :styleId, :integer
+    field :category_id, :integer
 
-    belongs_to :category, WhatsHoppin.Beer.Style, foreign_key: :category_id
+    # belongs_to :category, WhatsHoppin.Beer.Style, foreign_key: :category_id
 
     timestamps()
   end
