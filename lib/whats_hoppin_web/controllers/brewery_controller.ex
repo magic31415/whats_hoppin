@@ -3,6 +3,7 @@ defmodule WhatsHoppinWeb.BreweryController do
 
   alias WhatsHoppin.Locations
   alias WhatsHoppin.Locations.Brewery
+  alias WhatsHoppin.Repo
 
   def index(conn, _params) do
     breweries = Locations.list_breweries()
@@ -28,6 +29,13 @@ defmodule WhatsHoppinWeb.BreweryController do
   def show(conn, %{"id" => id}) do
     brewery = Locations.get_brewery!(id)
     render(conn, "show.html", brewery: brewery)
+  end
+
+  def show_state_index(conn, state) do
+    breweries = Locations.get_breweries_by_state(to_string(state))
+    conn
+    |> assign(:breweries_in_state, breweries)
+    |> render("state_index.html")
   end
 
   def edit(conn, %{"id" => id}) do

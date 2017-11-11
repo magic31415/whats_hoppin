@@ -1,35 +1,21 @@
-<h2>Show Brewery</h2>
+<h4><%= link @brewery.name, to: @brewery.website %>
+    <span class="text-muted"><%= "(#{@brewery.city}, #{@brewery.state})" %></span>
+</h4>
 
 <ul>
 
   <li>
-    <strong>Name:</strong>
-    <%= @brewery.name %>
+    <strong>Established date:</strong>
+    <%= @brewery.established_date %>
   </li>
 
   <li>
-    <strong>Website:</strong>
-    <%= @brewery.website %>
-  </li>
-
-  <li>
-    <strong>City:</strong>
-    <%= @brewery.city %>
-  </li>
-
-  <li>
-    <strong>State:</strong>
-    <%= @brewery.state %>
-  </li>
-
-  <li>
-    <strong>Established data:</strong>
-    <%= @brewery.established_data %>
-  </li>
-
-  <li>
-    <strong>Is mass owned?:</strong>
-    <%= @brewery.is_mass_owned? %>
+    <strong>Mass Owned?:</strong>
+    <%= if @brewery.is_mass_owned? do %>
+      Yes
+    <% else %>
+      No
+    <% end %>
   </li>
 
   <li>
@@ -37,12 +23,4 @@
     <%= @brewery.location_type %>
   </li>
 
-  <li>
-    <strong>Brewery:</strong>
-    <%= @brewery.brewery_id %>
-  </li>
-
 </ul>
-
-<span><%= link "Edit", to: brewery_path(@conn, :edit, @brewery) %></span>
-<span><%= link "Back", to: brewery_path(@conn, :index) %></span>

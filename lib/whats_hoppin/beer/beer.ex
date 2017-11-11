@@ -7,6 +7,7 @@ defmodule WhatsHoppin.Beer do
   alias WhatsHoppin.Repo
 
   alias WhatsHoppin.Beer.Category
+  alias WhatsHoppin.Beer.Style
 
   @doc """
   Returns the list of categories.
@@ -36,6 +37,13 @@ defmodule WhatsHoppin.Beer do
 
   """
   def get_category!(id), do: Repo.get!(Category, id)
+
+  def get_styles_by_category(c) do
+    IO.puts("Querying for styles with category id #{c.category_id}...")
+    res = Repo.all(from s in Style, where: s.category_id == ^c.category_id)
+    IO.puts("Number of styles: #{length res}")
+    res
+  end
 
   @doc """
   Creates a category.
@@ -101,8 +109,6 @@ defmodule WhatsHoppin.Beer do
   def change_category(%Category{} = category) do
     Category.changeset(category, %{})
   end
-
-  alias WhatsHoppin.Beer.Style
 
   @doc """
   Returns the list of styles.

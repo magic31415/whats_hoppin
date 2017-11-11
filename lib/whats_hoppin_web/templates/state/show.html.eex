@@ -1,0 +1,20 @@
+<h2>Breweries in <%= @state.name %> </h2>
+
+<table class="table">
+
+  <tbody>
+<%= for brewery <- @breweries_in_state do %>
+    <tr>
+      <td><%= "#{brewery.name}" %>
+          <span class="text-muted"><%= "(#{brewery.city})" %></span> 
+      </td>
+
+      <td class="text-right">
+        <span><%= link "View Brewery", to: brewery_path(@conn, :show, brewery), class: "btn btn-default btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "Back", to: state_path(@conn, :index) %></span>

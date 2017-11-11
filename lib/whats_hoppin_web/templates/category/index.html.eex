@@ -3,9 +3,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Categoryid</th>
       <th>Name</th>
-      <th>Desc</th>
 
       <th></th>
     </tr>
@@ -13,18 +11,12 @@
   <tbody>
 <%= for category <- @categories do %>
     <tr>
-      <td><%= category.categoryId %></td>
-      <td><%= category.name %></td>
-      <td><%= category.desc %></td>
+      <td><strong><%= category.name %></strong></td>
 
       <td class="text-right">
         <span><%= link "Show", to: category_path(@conn, :show, category), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: category_path(@conn, :edit, category), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: category_path(@conn, :delete, category), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Category", to: category_path(@conn, :new) %></span>
