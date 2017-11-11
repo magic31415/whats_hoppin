@@ -8,4 +8,3 @@
   <span><%= link "yo", to: BreweryController.show_state_index(@conn, state) %></span>
 <% end %>
 
-<span><%= link "New Brewery", to: brewery_path(@conn, :new) %></span>
