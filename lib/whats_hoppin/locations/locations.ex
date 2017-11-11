@@ -37,6 +37,11 @@ defmodule WhatsHoppin.Locations do
   """
   def get_brewery!(id), do: Repo.get!(Brewery, id)
 
+
+  def get_breweries_by_state(state) do
+    Repo.all(from b in Brewery, where: b.state == ^state)
+  end
+
   @doc """
   Creates a brewery.
 

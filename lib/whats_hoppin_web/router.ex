@@ -19,6 +19,8 @@ defmodule WhatsHoppinWeb.Router do
     resources "/breweries", BreweryController
     resources "/styles", StyleController
     resources "/categories", CategoryController
+
+    resources "/breweries_by_state", StateController, only: [:index, :show]
     get "/", PageController, :index
   end
 

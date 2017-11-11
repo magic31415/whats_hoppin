@@ -1,0 +1,11 @@
+<h2>Browse Breweries by State...</h2>
+
+
+<%= for b <- @breweries_in_state do %>
+
+  <p><%= b %></p>
+<%# 
+  <span><%= link "yo", to: BreweryController.show_state_index(@conn, state) %></span>
+<% end %>
+
+<%# <span><%= link "New Brewery", to: brewery_path(@conn, :new) %></span> %>
