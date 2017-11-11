@@ -107,7 +107,7 @@ defmodule Populator do
 
 			# update it!
 			_ ->
-				ss = Ecto.Changeset.change(ll, 
+				ll = Ecto.Changeset.change(ll, 
 					city: city, state: state, location_type: location_type,
 					brewery_id: brewery_id, name: name, is_mass_owned?: is_mass_owned,
 					website: website, established_date: established_date
@@ -123,9 +123,7 @@ defmodule Populator do
 	end
 
 	def update_breweries() do
-		# BeerData.get_resource_all_pages("locations")
-		BeerData.get_resource("locations", "p", 119)
-		|> elem(0)
+		BeerData.get_resource_all_pages("locations")
 		|> Enum.filter(fn l -> Map.get(l, "region") != nil end)
 		|> Enum.map(fn l -> create_or_update_brewery_location(l) end)
 	end
@@ -133,7 +131,9 @@ defmodule Populator do
 end
 
 HTTPoison.start
-# Populator.update_categories()
-# Populator.update_styles()
-
+IO.puts("Updating categories...")
+Populator.update_categories()
+IO.puts("\n\n\nUpdating styles...")
+Populator.update_styles()
+IO.puts("\n\n\nUpdating breweries...")
 Populator.update_breweries()
