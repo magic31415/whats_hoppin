@@ -7,7 +7,7 @@ defmodule WhatsHoppin.Locations.Brewery do
   schema "breweries" do
     field :brewery_id, :string
     field :city, :string
-    field :established_data, :integer
+    field :established_date, :string
     field :is_mass_owned?, :boolean, default: false
     field :location_type, :string
     field :name, :string

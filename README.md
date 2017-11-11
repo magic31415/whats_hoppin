@@ -1,5 +1,11 @@
 # WhatsHoppin
 
+
+## Database Population ##
+
+We found that hitting the BreweryDB API in the ways we needed on each page load were taking an unacceptably long amount of time. We will leverage `scripts/populate-db.exs` in a cron job to periodically pull down the brewery and beer data that we need, updating our local database so we can serve these pages faster. 
+
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
