@@ -1,11 +1,18 @@
-<h2>Browse Breweries by State...</h2>
+<h2>Breweries in <%= @state.name %> </h2>
 
+<table class="table">
 
-<%= for b <- @breweries_in_state do %>
+  <tbody>
+<%= for brewery <- @breweries_in_state do %>
+    <tr>
+      <td><%= brewery.name %></td>
 
-  <p><%= b %></p>
-<%# 
-  <span><%= link "yo", to: BreweryController.show_state_index(@conn, state) %></span>
+      <td class="text-right">
+        <span><%= link "View Brewery", to: brewery_path(@conn, :show, brewery), class: "btn btn-default btn-xs" %></span>
+      </td>
+    </tr>
 <% end %>
+  </tbody>
+</table>
 
-<%# <span><%= link "New Brewery", to: brewery_path(@conn, :new) %></span> %>
+<span><%= link "Back", to: state_path(@conn, :index) %></span>

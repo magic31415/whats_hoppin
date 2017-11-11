@@ -23,8 +23,8 @@
   </li>
 
   <li>
-    <strong>Established data:</strong>
-    <%= @brewery.established_data %>
+    <strong>Established date:</strong>
+    <%= @brewery.established_date %>
   </li>
 
   <li>
@@ -44,5 +44,4 @@
 
 </ul>
 
-<span><%= link "Edit", to: brewery_path(@conn, :edit, @brewery) %></span>
 <span><%= link "Back", to: brewery_path(@conn, :index) %></span>

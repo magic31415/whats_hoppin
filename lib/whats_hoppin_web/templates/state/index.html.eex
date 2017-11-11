@@ -1,12 +1,16 @@
 <h2>Browse Breweries by State...</h2>
 
+<table class="table">
 
+  <tbody>
 <%= for state <- @states do %>
+    <tr>
+      <td><%= state.name %></td>
 
-  <p><%= state %></p>
-
-  <span><%= link "yo", to: state_path(@conn, :show, [state: state]) %></span>
-
+      <td class="text-right">
+        <span><%= link "View Breweries", to: state_path(@conn, :show, state), class: "btn btn-default btn-xs" %></span>
+      </td>
+    </tr>
 <% end %>
-
-<%# <span><%= link "New Brewery", to: brewery_path(@conn, :new) %></span>
+  </tbody>
+</table>
