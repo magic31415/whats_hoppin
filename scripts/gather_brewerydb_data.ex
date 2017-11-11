@@ -174,6 +174,8 @@ defmodule BeerData do
 	locations that are owned by Trillum)
 	"""
 	def get_breweries_in_state(state) do
+		# need to replace spaces with %20 in a URL query string
+		state = String.replace(state, " ", "%20")
 		api_path = path("locations", "region", state)
 		get_path(api_path)
 		|> maybe_get_all_pages(api_path)
