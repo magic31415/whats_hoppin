@@ -24,5 +24,3 @@
   </li>
 
 </ul>
-
-<span><%= link "Back", to: brewery_path(@conn, :index) %></span>
