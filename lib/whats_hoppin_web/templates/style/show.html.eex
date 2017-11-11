@@ -1,38 +1,41 @@
-<h2>Show Style</h2>
+<h2><%= @style.name %></h2>
 
 <ul>
 
   <li>
-    <strong>Styleid:</strong>
-    <%= @style.styleId %>
+    <strong>Description:</strong>
+    <br />
+      <%= @style.desc %>
+    <br />
+    <br />
   </li>
 
+  <%= if @style.ibuMin != "" do %>
   <li>
-    <strong>Name:</strong>
-    <%= @style.name %>
-  </li>
-
-  <li>
-    <strong>Ibumin:</strong>
+    <strong>Minimum IBU:</strong>
     <%= @style.ibuMin %>
   </li>
+  <% end %>
 
+  <%= if @style.ibuMax != "" do %>
   <li>
-    <strong>Ibumax:</strong>
+    <strong>Maximum IBU:</strong>
     <%= @style.ibuMax %>
   </li>
+  <% end %>
 
+  <%= if @style.abvMin != "" do %>
   <li>
-    <strong>Abvmin:</strong>
-    <%= @style.abvMin %>
+    <strong>Minimum ABV:</strong>
+    <%= @style.abvMin %>%
   </li>
+  <% end %>
 
+  <%= if @style.abvMax != "" do %>
   <li>
-    <strong>Abvmax:</strong>
-    <%= @style.abvMax %>
+    <strong>Maximum ABV:</strong>
+    <%= @style.abvMax %>%
   </li>
+  <% end %>
 
 </ul>
-
-<span><%= link "Edit", to: style_path(@conn, :edit, @style) %></span>
-<span><%= link "Back", to: style_path(@conn, :index) %></span>

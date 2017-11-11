@@ -5,7 +5,9 @@
   <tbody>
 <%= for brewery <- @breweries_in_state do %>
     <tr>
-      <td><%= brewery.name %></td>
+      <td><%= "#{brewery.name}" %>
+          <span class="text-muted"><%= "(#{brewery.city})" %></span> 
+      </td>
 
       <td class="text-right">
         <span><%= link "View Brewery", to: brewery_path(@conn, :show, brewery), class: "btn btn-default btn-xs" %></span>

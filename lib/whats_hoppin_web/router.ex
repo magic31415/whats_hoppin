@@ -16,9 +16,9 @@ defmodule WhatsHoppinWeb.Router do
   scope "/", WhatsHoppinWeb do
     pipe_through :browser # Use the default browser stack
 
-    resources "/breweries", BreweryController
-    resources "/styles", StyleController
-    resources "/categories", CategoryController
+    resources "/breweries", BreweryController, only: [:show, :index]
+    resources "/styles", StyleController, only: [:show, :index]
+    resources "/categories", CategoryController, only: [:show, :index]
 
     resources "/breweries_by_state", StateController, only: [:index, :show]
     get "/", PageController, :index

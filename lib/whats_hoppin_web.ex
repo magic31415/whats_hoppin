@@ -37,6 +37,8 @@ defmodule WhatsHoppinWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
+      alias WhatsHoppin.Beer
+
       import WhatsHoppinWeb.Router.Helpers
       import WhatsHoppinWeb.ErrorHelpers
       import WhatsHoppinWeb.Gettext

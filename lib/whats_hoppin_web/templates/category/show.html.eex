@@ -1,23 +1,18 @@
-<h2>Show Category</h2>
+<h2>Styles within "<%= @category.name %>"...</h2>
 
-<ul>
+<table class="table">
 
-  <li>
-    <strong>Categoryid:</strong>
-    <%= @category.categoryId %>
-  </li>
+  <tbody>
+<%= for s <- Beer.get_styles_by_category(@category) do %>
+    <tr>
+      <td><%= "#{s.name}" %></td>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @category.name %>
-  </li>
+      <td class="text-right">
+        <span><%= link "View Style", to: style_path(@conn, :show, s), class: "btn btn-default btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
 
-  <li>
-    <strong>Desc:</strong>
-    <%= @category.desc %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: category_path(@conn, :edit, @category) %></span>
-<span><%= link "Back", to: category_path(@conn, :index) %></span>
+<span><%= link "Browse by Category", to: category_path(@conn, :index) %></span>
