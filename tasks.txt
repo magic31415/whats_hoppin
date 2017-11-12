@@ -1,0 +1,6 @@
+Hide secrets from GitHub
+Delete new message bug
+Get enter working again
+Favorites for users
+See info on a specific beer
+
