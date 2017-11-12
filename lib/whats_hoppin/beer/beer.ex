@@ -203,4 +203,22 @@ defmodule WhatsHoppin.Beer do
   def change_style(%Style{} = style) do
     Style.changeset(style, %{})
   end
+
+  # Helpers for generating ABV and IBU info text 
+  def gen_text(min, max, units) do
+    if min != "" || max != "" do
+      dash = if min != "" && max != "" do " - " else "" end
+      min <> dash <> max <> units
+    else
+      ""
+    end
+  end
+
+  def gen_abv_text(%Style{} = style) do
+    gen_text(style.abvMin, style.abvMax, "% ABV")
+  end
+
+  def gen_ibu_text(%Style{} = style) do
+    gen_text(style.ibuMin, style.ibuMax, " IBUs")
+  end
 end

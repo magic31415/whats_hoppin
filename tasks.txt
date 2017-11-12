@@ -4,4 +4,6 @@ Get enter working again
 Favorites for users
 See info on a specific beer
 Buy a domain?
+Find examples of beers with missing ABV and IBU parts
 
+Get rid of all controller actions / templates / views / routes that we dont need
