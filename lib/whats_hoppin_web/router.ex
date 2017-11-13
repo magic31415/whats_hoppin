@@ -22,6 +22,8 @@ defmodule WhatsHoppinWeb.Router do
     resources "/states", StateController, only: [:index, :show]
     resources "/breweries", BreweryController, only: [:show, :index]
 
+	resources "/messages", MessageController
+
     get "/", PageController, :index
   end
 
