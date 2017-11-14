@@ -7,7 +7,5 @@ Find examples of beers with missing ABV and IBU parts
 Get rid of all controller actions / templates / views / routes that we dont need
 TODOs
 reply to messages (comments)
-confirm are you sure for delete
-Forum id string and type string one field
 broadcast on a subtopic
 number of people talking about this
