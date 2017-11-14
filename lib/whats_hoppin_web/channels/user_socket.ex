@@ -3,6 +3,7 @@ defmodule WhatsHoppinWeb.UserSocket do
 
   ## Channels
   # channel "room:*", WhatsHoppinWeb.RoomChannel
+  channel "forum:*", WhatsHoppinWeb.ForumChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

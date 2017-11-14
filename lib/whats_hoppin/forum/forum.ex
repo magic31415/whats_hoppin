@@ -21,6 +21,16 @@ defmodule WhatsHoppin.Forum do
     Repo.all(Message)
   end
 
+  def list_messages_for_forum(forum_id) do
+    f_id = to_string(forum_id)
+    query = from m in Message,
+            where: m.forum_id == ^f_id,
+            order_by: [desc: m.inserted_at],
+            select: m
+
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single message.
 
@@ -53,6 +63,10 @@ defmodule WhatsHoppin.Forum do
     %Message{}
     |> Message.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def get_latest_message!() do
+    Repo.one(from m in Message, order_by: [desc: m.inserted_at], limit: 1)
   end
 
   @doc """

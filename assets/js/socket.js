@@ -1,62 +1,130 @@
-// NOTE: The contents of this file will only be executed if
-// you uncomment its entry in "assets/js/app.js".
-
-// To use Phoenix channels, the first step is to import Socket
-// and connect at the socket path in "lib/web/endpoint.ex":
 import {Socket} from "phoenix"
+export default socket
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
-
-// When you connect, you'll often need to authenticate the client.
-// For example, imagine you have an authentication plug, `MyAuth`,
-// which authenticates the session and assigns a `:current_user`.
-// If the current user exists you can assign the user's token in
-// the connection for use in the layout.
-//
-// In your "lib/web/router.ex":
-//
-//     pipeline :browser do
-//       ...
-//       plug MyAuth
-//       plug :put_user_token
-//     end
-//
-//     defp put_user_token(conn, _) do
-//       if current_user = conn.assigns[:current_user] do
-//         token = Phoenix.Token.sign(conn, "user socket", current_user.id)
-//         assign(conn, :user_token, token)
-//       else
-//         conn
-//       end
-//     end
-//
-// Now you need to pass this token to JavaScript. You can do so
-// inside a script tag in "lib/web/templates/layout/app.html.eex":
-//
-//     <script>window.userToken = "<%= assigns[:user_token] %>";</script>
-//
-// You will need to verify the user token in the "connect/2" function
-// in "lib/web/channels/user_socket.ex":
-//
-//     def connect(%{"token" => token}, socket) do
-//       # max_age: 1209600 is equivalent to two weeks in seconds
-//       case Phoenix.Token.verify(socket, "user socket", token, max_age: 1209600) do
-//         {:ok, user_id} ->
-//           {:ok, assign(socket, :user, user_id)}
-//         {:error, reason} ->
-//           :error
-//       end
-//     end
-//
-// Finally, pass the token on connect as below. Or remove it
-// from connect if you don't care about authentication.
+let chan = socket.channel("forum:" + subtopic, {});
+let subtopic = $('h2#forum-name').data('forum-id');
+let new_message_box = $("#new-message-content")[0];
 
 socket.connect()
 
-// Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+function channel_init() {
+	if ($('div#is-forum').data('is-forum') == true) {
 
-export default socket
+		let submitButtonObject = $("a#submit-button");
+		let submitButton = submitButtonObject[0];
+		new_message_box.value = "";
+
+		chan.join()
+		  .receive("ok", resp => { console.log('Joined channel ' + subtopic + ' successfully', resp) })
+		  .receive("error", resp => { console.log('Unable to join', resp) })
+
+		// receive from channel
+		chan.on("create", got_create);
+		chan.on("update", got_update);
+		chan.on("delete", got_delete);
+
+		// event listeners
+		submitButton.addEventListener("click", new_message(submitButtonObject));
+		add_event_listeners(0);
+	}
+}
+
+$(channel_init);
+
+// TODO simplify
+function add_event_listeners(id) {
+	let messages = id ? $("#message-" + id) : $("[id^=message-]");
+	let edit_buttons = Array.from(messages.find("a.edit-button"));
+	let delete_buttons = Array.from(messages.find("a.delete-button"));
+
+	for (let i = 0; i < messages.length; i++) {
+		let message_id = messages[i].id.substring(8);
+		edit_buttons[i].addEventListener("click", edit_message(message_id));
+		delete_buttons[i].addEventListener("click", delete_message(message_id));
+	}
+}
+
+// NEW
+function new_message(button) {
+	return function() {
+		content = new_message_box.value;
+		if(content && content.length) {
+			chan.push("create",
+								{content: content,
+		     				 forum_id: subtopic.toString()});
+			$('#message_content').val('');
+			new_message_box.value = "";
+		}
+	}
+}
+
+// CREATE
+function got_create(msg) {
+	if(msg.forum_id == subtopic) {
+	 	let message_row =
+			'<tr id="message-' + msg.id + '"> \
+	  		<td id="content-' + msg.id + '">' + msg.content + '</td> \
+	  		<td class="text-right"> \
+	  			<span><a href="#" \
+	  							 class="btn btn-outline-warning btn-xs edit-button" \
+	  							 id="edit-' + msg.id + '">Edit</a></span> \
+	  			<span><a href="#" \
+	  							 class="btn btn-danger btn-xs delete-button" \
+	  							 id="delete-' + msg.id + '">Delete</a></span> \
+	  		</td> \
+	  	</tr>';
+
+		$('tbody').prepend(message_row);
+		add_event_listeners(msg.id);
+	}
+}
+
+// EDIT
+function edit_message(id) {
+	return function() {
+		let message = $("#message-" + id);
+		let content = $("#content-" + id);
+		let edit_button = $("#edit-" + id);
+
+		if(edit_button.text() === "Edit") {
+			let input = '<td> \
+										<input type="text" id="content-' + id + '" value="' + content.text() + '"> \
+									</td>'
+			content.remove();
+			message.prepend(input);
+			edit_button.text('Update');
+		}
+		else {
+			let content_text = content[0].value
+			edit_button.text('Edit');
+			chan.push("update", {id: id,
+			                     content: content_text,
+			                     forum_id: subtopic});
+			content.parent().remove();
+			message.prepend('<td id="content-' + id + '">' + content_text + '</td>');
+		}
+	};
+}
+
+// UPDATE
+function got_update(msg) {
+	if(msg.forum_id == subtopic) {
+		$("#content-" + msg.id)[0].firstChild.data = msg.content;
+	}
+}
+
+// DELETE
+function delete_message(id) {
+	return function() {
+		if(confirm('Are you sure?')) {
+			chan.push("delete", {id: id, forum_id: subtopic});
+		}
+	};
+}
+
+function got_delete(msg) {
+	$('#message-' + msg.id).remove();
+}
