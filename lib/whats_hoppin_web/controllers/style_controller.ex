@@ -3,11 +3,12 @@ defmodule WhatsHoppinWeb.StyleController do
 
   alias WhatsHoppin.Beer
   alias WhatsHoppin.Beer.Style
+  alias WhatsHoppin.Forum
 
-  def index(conn, _params) do
-    styles = Beer.list_styles()
-    render(conn, "index.html", styles: styles)
-  end
+  # def index(conn, _params) do
+  #   styles = Beer.list_styles()
+  #   render(conn, "index.html", styles: styles)
+  # end
 
   # def new(conn, _params) do
   #   changeset = Beer.change_style(%Style{})
@@ -27,7 +28,8 @@ defmodule WhatsHoppinWeb.StyleController do
 
   def show(conn, %{"id" => id}) do
     style = Beer.get_style!(id)
-    render(conn, "show.html", style: style)
+    messages = Forum.list_messages_for_forum(style.styleId)
+    render(conn, "show.html", style: style, messages: messages)
   end
 
   # def edit(conn, %{"id" => id}) do

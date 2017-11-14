@@ -5,10 +5,10 @@ defmodule WhatsHoppinWeb.BreweryController do
   alias WhatsHoppin.Locations.Brewery
   alias WhatsHoppin.Repo
 
-  def index(conn, _params) do
-    breweries = Locations.list_breweries()
-    render(conn, "index.html", breweries: breweries)
-  end
+  # def index(conn, _params) do
+  #   breweries = Locations.list_breweries()
+  #   render(conn, "index.html", breweries: breweries)
+  # end
 
   # def new(conn, _params) do
   #   changeset = Locations.change_brewery(%Brewery{})
