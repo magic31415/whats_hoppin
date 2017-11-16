@@ -4,6 +4,7 @@ defmodule WhatsHoppinWeb.BreweryController do
   alias WhatsHoppin.Locations
   alias WhatsHoppin.Locations.Brewery
   alias WhatsHoppin.Repo
+  alias WhatsHoppin.Beer
 
   # def index(conn, _params) do
   #   breweries = Locations.list_breweries()
@@ -28,7 +29,8 @@ defmodule WhatsHoppinWeb.BreweryController do
 
   def show(conn, %{"id" => id}) do
     brewery = Locations.get_brewery!(id)
-    render(conn, "show.html", brewery: brewery)
+    beers = Beer.get_beers_within_brewery(brewery.brewery_id)
+    render(conn, "show.html", brewery: brewery, brewery_beers: beers)
   end
 
   # TODO put this somewhere else

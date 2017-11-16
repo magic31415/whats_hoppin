@@ -36,3 +36,19 @@
     <% end %>
   </tbody>
 </table>
+
+<%# render a random selection of beers within the style %>
+<p>Sound good? Here's a few beers with this style...</p>
+<table class="table">
+  <tbody id="table-body-beer">
+    <%= for beer <- @random_beers do %>
+    <tr>
+      <td>
+        <a href="#" class="text-muted" title="Description" data-toggle="hover" data-trigger="hover" 
+        data-content="<%= Map.get(beer, "description") %>">
+        <%= Map.get(beer, "name") %></a>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

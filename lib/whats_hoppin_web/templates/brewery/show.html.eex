@@ -24,3 +24,32 @@
   </li>
 
 </ul>
+
+<%# selection of beers made by this brewery, if possible - some breweries have no beers
+    linked to them on brewryDB %>
+
+<%= if @brewery_beers == nil do %>
+  <p>
+    No beers linked to this brewery at this time! Sorry about that!
+    <%= link "Please visit #{@brewery.name}'s website ", to: @brewery.website %> 
+    for more information.
+  </p>
+
+<% else %>
+
+  <p>Here's a few beers made by this brewery...</p>
+  <table class="table">
+    <tbody id="table-body-beer">
+      <%= for beer <- @brewery_beers do %>
+      <tr>
+        <td>
+          <a href="#" class="text-muted" title="Description" data-toggle="hover" data-trigger="hover" 
+          data-content="<%= Map.get(beer, "description") %>">
+          <%= Map.get(beer, "name") %></a>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
