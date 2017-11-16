@@ -4,8 +4,8 @@ export default socket
 // import ReactDOM from 'react-dom';
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
-let chan = socket.channel("forum:" + subtopic, {});
 let subtopic = $('h2#forum-name').data('forum-id');
+let chan = socket.channel("forum:" + subtopic, {});
 let new_message_box = $("#new-message-content")[0];
 
 socket.connect()
