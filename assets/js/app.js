@@ -16,4 +16,9 @@ import socket from "./socket";
 
 "use strict";
 
+$(function () {
+  // $('[data-toggle="popover"]').popover();
+  $('[data-toggle="hover"]').popover()
+})
+
 // let handlebars = require("handlebars");
