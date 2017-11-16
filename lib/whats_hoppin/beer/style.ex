@@ -23,6 +23,7 @@ defmodule WhatsHoppin.Beer.Style do
   def changeset(%Style{} = style, attrs) do
     style
     |> cast(attrs, [:styleId, :name, :ibuMin, :ibuMax, :abvMin, :abvMax, :category_id, :desc])
+    # TODO are all these required? Not all of them are always present
     |> validate_required([:styleId, :name, :ibuMin, :ibuMax, :abvMin, :abvMax, :category_id, :desc])
   end
 end
