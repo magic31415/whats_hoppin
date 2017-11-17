@@ -17,8 +17,6 @@
                                data_forum_id: @style.id %></div>
 
 <%# Messages %>
-
-
 <div class="row">
 
 <div class="col-8">
@@ -45,7 +43,7 @@
   </div>
 </div> <%# col-8 %>
 
-<div class="col-4" style="text-align: center;">
+<div class="col-4" style="text-align: center; height: 600px; overflow-y: scroll;">
   <%# render a random selection of beers within the style %>
   <table class="table" style="background-color:powderblue; border: 5px solid grey;">
     <tbody id="table-body-beer">

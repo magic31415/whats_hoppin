@@ -16,21 +16,21 @@ import socket from "./socket";
 
 "use strict";
 
-$(function () {
-  // $('[data-toggle="popover"]').popover();
-  $('[data-toggle="hover"]').popover()
-})
-
 // let handlebars = require("handlebars");
 
 // on page load, figure out the height of the largest card, and make all cards that same height
+// also, activate the popover windows
 $(function () {
+
+	// activate all hover-over popover windows
+	$('[data-toggle="hover"]').popover();
+
 	var max = 0;
 	for (var i = 0 ; i < $(".card").length; i++) {
 		var thisHeight = $(".card").eq(i).height();
-		if(thisHeight >= max){
-			max = currentHeight;
-		}
-  }
-  $(".card").height(max);
+		max = thisHeight >= max ? thisHeight : max;
+  	}
+
+  	// set all cards to the same height
+	$(".card").height(max);
 });

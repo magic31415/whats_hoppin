@@ -37,7 +37,7 @@
 
 <% else %>
 
-<div class="col-4" style="text-align: center;">
+<div class="col-4" style="text-align: center; height: 600px; overflow-y: scroll;">
   <table class="table" style="background-color:powderblue; border: 5px solid grey;">
     <tbody id="table-body-beer">
       <tr>

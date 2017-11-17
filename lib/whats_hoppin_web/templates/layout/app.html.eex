@@ -12,14 +12,28 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li></li>
+    <div class="container" style="margin-bottom: 20px;">
+      <nav class="navbar navbar-dark bg-secondary navbar-expand-md">
+        <%= link("Home", to: page_path(@conn, :index)) %>
+
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse" data-target="#main-navbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="main-navbar">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link "Breweries by State", to: state_path(@conn, :index),
+                                   class: "nav-link" %>
+            </li>
+            <li class="nav-item active">
+              <%= link "Beer Categories", to: category_path(@conn, :index),
+                                   class: "nav-link" %>
+            </li>
           </ul>
-        </nav>
-      </header>
+        </div>
+      </nav>
 
       <%= if get_flash(@conn, :info) do %>
         <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
