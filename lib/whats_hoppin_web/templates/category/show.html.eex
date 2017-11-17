@@ -1,18 +1,25 @@
-<h2>Styles within "<%= @category.name %>"...</h2>
+<h2 style="margin-top: 20px">Styles within "<%= @category.name %>"...</h2>
 
-<table class="table">
 
-  <tbody>
+<div class="row justify-content-center" style="margin-top: 25px;">
 <%= for s <- Beer.get_styles_by_category(@category) do %>
-    <tr>
-      <td><%= "#{s.name}" %></td>
+  <div class="col-sm-5" style="text-align: center; margin-top: 20px;">
+    <div class="card" style="background-color: powderblue;">
+      <div class="card-block">
+        <h3 class="card-title"><strong><%= s.name %></strong></h3>
+        <p class="card-text">
+        	<strong>ABV Range:</strong> <%= #{s.abvMin}% %> - <%= #{s.abvMax}% %>
+        </p>
+        <p class="card-text">
+        	<strong>IBU Range:</strong> <%= s.ibuMin %> - <%= s.ibuMax %>
+        </p>
+        <span><%= link "View Style", to: style_path(@conn, :show, s), class: "btn-default btn-md" %></span>
+      </div>
+    </div>
+  </div>
+ <% end %>
+ </div> <%# row %>
 
-      <td class="text-right">
-        <span><%= link "View Style", to: style_path(@conn, :show, s), class: "btn btn-default btn-xs" %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<span><%= link "Browse by Category", to: category_path(@conn, :index) %></span>
+<div class="row" style="margin-top: 20px;">
+  <span><%= link "Browse by Category", to: category_path(@conn, :index) %></span>
+</div>
