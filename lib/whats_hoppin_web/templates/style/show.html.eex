@@ -47,7 +47,7 @@
 
 <div class="col-4" style="text-align: center;">
   <%# render a random selection of beers within the style %>
-  <table class="table" style="background-color:powderblue;">
+  <table class="table" style="background-color:powderblue; border: 5px solid grey;">
     <tbody id="table-body-beer">
     <tr>
       <th>Beers in this style...</th>

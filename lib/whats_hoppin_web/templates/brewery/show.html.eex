@@ -38,7 +38,7 @@
 <% else %>
 
 <div class="col-4" style="text-align: center;">
-  <table class="table" style="background-color:powderblue;">
+  <table class="table" style="background-color:powderblue; border: 5px solid grey;">
     <tbody id="table-body-beer">
       <tr>
         <th>Beers by <%= @brewery.name %>...</th>
@@ -46,7 +46,7 @@
       <%= for beer <- @brewery_beers do %>
       <tr>
         <td>
-          <a href="#" class="text-muted" title="Description" data-toggle="hover" data-trigger="hover" 
+          <a href="#" title="Description" data-toggle="hover" data-trigger="hover" 
           data-content="<%= Map.get(beer, "description") %>">
           <%= Map.get(beer, "name") %></a>
         </td>
