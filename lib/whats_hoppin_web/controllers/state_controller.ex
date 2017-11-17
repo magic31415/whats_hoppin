@@ -5,7 +5,7 @@ defmodule WhatsHoppinWeb.StateController do
   alias WhatsHoppin.Locations.State
 
   def index(conn, _params) do
-    states = Locations.list_states()
+    states = Enum.sort(Locations.list_states())
     render(conn, "index.html", states: states)
   end
 
