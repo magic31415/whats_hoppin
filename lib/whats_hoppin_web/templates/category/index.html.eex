@@ -4,7 +4,7 @@
 <div class="row justify-content-center" style="margin-top: 25px;">
 <%= for c <- @categories do %>
   <div class="col-sm-5" style="text-align: center; margin-top: 20px;">
-    <div class="card" style="background-color: powderblue;">
+    <div class="card" style="background-color: powderblue; border: 3px solid grey;">
       <div class="card-block">
         <h3 class="card-title"><strong><%= c.name %></strong></h3>
         <p class="card-text">...</p>
