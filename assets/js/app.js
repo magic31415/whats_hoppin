@@ -11,9 +11,21 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import "phoenix_html"
+// import "phoenix_html"
 import socket from "./socket";
 
 "use strict";
 
 // let handlebars = require("handlebars");
+
+// on page load, figure out the height of the largest card, and make all cards that same height
+$(function () {
+	var max = 0;
+	for (var i = 0 ; i < $(".card").length; i++) {
+		var thisHeight = $(".card").eq(i).height();
+		if(thisHeight >= max){
+			max = currentHeight;
+		}
+  }
+  $(".card").height(max);
+});
