@@ -3,7 +3,7 @@
 
 <h2 id="forum-name" data-forum-id="<%= @style.styleId %>"><%= @style.name %></h2>
 <h4 class="d-inline mr-5"><%= Beer.gen_abv_text(@style) %></h4>
-<h4 class="d-inline"><%= Beer.gen_ibu_text(@style) %></h4>
+<h4><%= Beer.gen_ibu_text(@style) %></h4>
 
 <%# Form for posting a message %>
 <div class="form-group mt-5">
@@ -17,38 +17,52 @@
                                data_forum_id: @style.id %></div>
 
 <%# Messages %>
-<table class="table">
-  <tbody id="table-body">
-  <%= for message <- @messages do %>
-    <tr id="message-<%= message.id %>">
-      <td id="content-<%= message.id %>"><%= message.content %></td>
-      <td class="text-right">
-        <span><%= link "Edit",
-                  to: "#",
-                  class: "btn btn-outline-warning btn-xs edit-button",
-                  id: "edit-#{message.id}" %></span>
-        <span><%= link "Delete",
-                  to: "#",
-                  class: "btn btn-danger btn-xs delete-button",
-                  id: "delete-#{message.id}" %></span>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<%# render a random selection of beers within the style %>
-<p>Sound good? Here's a few beers with this style...</p>
-<table class="table">
-  <tbody id="table-body-beer">
-    <%= for beer <- @random_beers do %>
+
+<div class="row">
+
+<div class="col-8">
+  <div class="col-bordered">
+    <table class="table">
+      <tbody id="table-body">
+      <%= for message <- @messages do %>
+        <tr id="message-<%= message.id %>">
+          <td id="content-<%= message.id %>"><%= message.content %></td>
+          <td class="text-right">
+            <span><%= link "Edit",
+                      to: "#",
+                      class: "btn btn-outline-warning btn-xs edit-button",
+                      id: "edit-#{message.id}" %></span>
+            <span><%= link "Delete",
+                      to: "#",
+                      class: "btn btn-danger btn-xs delete-button",
+                      id: "delete-#{message.id}" %></span>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div> <%# col-8 %>
+
+<div class="col-4" style="text-align: center;">
+  <%# render a random selection of beers within the style %>
+  <table class="table" style="background-color:powderblue;">
+    <tbody id="table-body-beer">
     <tr>
-      <td>
-        <a href="#" class="text-muted" title="Description" data-toggle="hover" data-trigger="hover" 
-        data-content="<%= Map.get(beer, "description") %>">
-        <%= Map.get(beer, "name") %></a>
-      </td>
+      <th>Beers in this style...</th>
     </tr>
-    <% end %>
-  </tbody>
-</table>
+      <%= for beer <- @random_beers do %>
+      <tr>
+        <td>
+          <a href="#" title="Description" data-toggle="hover" data-trigger="hover" 
+          data-content="<%= WhatsHoppin.Beer.format_beer_description(beer) %>">
+          <%= Map.get(beer, "name") %></a>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> <%# col-4 %>
+
+</div> <%# row %>

@@ -37,9 +37,12 @@
 
 <% else %>
 
-  <p>Here's a few beers made by this brewery...</p>
-  <table class="table">
+<div class="col-4" style="text-align: center;">
+  <table class="table" style="background-color:powderblue;">
     <tbody id="table-body-beer">
+      <tr>
+        <th>Beers by <%= @brewery.name %>...</th>
+      </tr>
       <%= for beer <- @brewery_beers do %>
       <tr>
         <td>
@@ -51,5 +54,6 @@
       <% end %>
     </tbody>
   </table>
+</div>
 
 <% end %>

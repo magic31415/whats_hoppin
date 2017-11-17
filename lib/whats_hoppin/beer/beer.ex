@@ -11,7 +11,33 @@ defmodule WhatsHoppin.Beer do
 
 
   ################################################
-  # stuff for gathering data from the BrweryDB API
+  # Stuff for formatting HTML data
+  ################################################
+
+  def format_beer_description(beer) do
+    failStr = "No description available."
+    desc = 
+    case d = Map.get(beer, "description") do
+      nil -> "No description available."
+      _   -> d
+    end
+
+    abvStr = 
+    case abv = Map.get(beer, "abv") do
+      nil -> ""
+      _   -> ["ABV: ", abv] |> Enum.join("")
+    end
+
+    if abvStr == "" do
+      desc
+    else
+      "#{desc}\n\n#{abvStr}%"
+    end
+  end
+
+
+  ################################################
+  # stuff for gathering data from the BreweryDB API
   ################################################
 
 
