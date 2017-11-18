@@ -104,6 +104,14 @@ defmodule Populator do
 		established_date = Map.get(brewery, "established", "")
 		desc = Map.get(brewery, "description", "")
 
+		# only look for image URLS is the key exists
+		icon_url = medium_pic_url = large_pic_url = ""
+		if images_map = Map.get(brewery, "images") do
+			icon_url = Map.get(images_map, "icon", "")
+			medium_pic_url = Map.get(images_map, "squareMedium") || Map.get(images_map, "medium", "")
+			large_pic_url = Map.get(images_map, "squareLarge") || Map.get(images_map, "large", "")
+		end
+
 		case ll = Repo.get_by(Brewery, brewery_id: brewery_id) do
 			
 			# create it!
@@ -112,7 +120,8 @@ defmodule Populator do
 					{city: city, state: state, location_type: location_type,
 					brewery_id: brewery_id, name: name, is_mass_owned?: is_mass_owned,
 					website: website, established_date: established_date,
-					desc: desc}
+					desc: desc, icon_url: icon_url, medium_pic_url: medium_pic_url,
+					large_pic_url: large_pic_url}
 				)
 
 			# update it!
@@ -121,7 +130,8 @@ defmodule Populator do
 					city: city, state: state, location_type: location_type,
 					brewery_id: brewery_id, name: name, is_mass_owned?: is_mass_owned,
 					website: website, established_date: established_date,
-					desc: desc
+					desc: desc, medium_pic_url: medium_pic_url,
+					large_pic_url: large_pic_url
 				)
 				case Repo.update(ll) do
 					{:ok, struct} ->
@@ -141,10 +151,10 @@ defmodule Populator do
 
 end
 
-HTTPoison.start
-IO.puts("Updating categories...")
-Populator.update_categories()
-IO.puts("\n\n\nUpdating styles...")
-Populator.update_styles()
-IO.puts("\n\n\nUpdating breweries...")
+# HTTPoison.start
+# IO.puts("Updating categories...")
+# Populator.update_categories()
+# IO.puts("\n\n\nUpdating styles...")
+# Populator.update_styles()
+IO.puts("\n\n\nUpdating breweries...\n(this may take a while, but its not hanging)")
 Populator.update_breweries()
