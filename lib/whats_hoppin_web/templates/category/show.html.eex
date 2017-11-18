@@ -1,4 +1,4 @@
-<h2 style="margin-top: 20px">Styles within "<%= @category.name %>"...</h2>
+<h2 style="margin-top: 20px; text-align: center">Styles within "<%= @category.name %>"...</h2>
 
 
 <div class="row justify-content-center" style="margin-top: 25px;">

@@ -1,5 +1,5 @@
 
-<h2 style="margin-top: 10px;">Breweries in <%= @state.name %>...</h2>
+<h2 style="margin-top: 10px; text-align: center;">Breweries in <%= @state.name %>...</h2>
 
 
 <div class="row" style="margin-top: 25px;">

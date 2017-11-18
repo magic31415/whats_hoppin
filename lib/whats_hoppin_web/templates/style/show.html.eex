@@ -2,6 +2,9 @@
 <div id="is-forum" data-is-forum="true" hidden></div> 
 
 <h2 id="forum-name" data-forum-id="<%= @style.styleId %>"><%= @style.name %></h2>
+<div class="row" style="margin-left: 5px;">
+  <p class="text-muted"><%= @style.desc %></p>
+</div>
 <h4 class="d-inline mr-5"><%= Beer.gen_abv_text(@style) %></h4>
 <h4><%= Beer.gen_ibu_text(@style) %></h4>
 

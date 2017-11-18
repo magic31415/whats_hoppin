@@ -12,8 +12,8 @@
   </head>
 
   <body>
-    <div class="container" style="margin-bottom: 20px;">
-      <nav class="navbar navbar-dark bg-secondary navbar-expand-md">
+    <div class="container">
+      <nav class="navbar navbar-dark bg-secondary navbar-expand-md" style="margin-bottom: 20px;">
         <%= link("Home", to: page_path(@conn, :index)) %>
 
         <button class="navbar-toggler" type="button"
