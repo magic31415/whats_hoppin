@@ -9,8 +9,10 @@ defmodule WhatsHoppin.Beer do
   alias WhatsHoppin.Beer.Category
   alias WhatsHoppin.Beer.Style
 
-
-  # taken from Nat Tuck's lecture notes about asynchronous operations using Task
+  ##############################################################################
+  # Taken from Nat Tuck's lecture notes about asynchronous operations using Task
+  ##############################################################################
+  
   defp parallel_map(xs, op) do
     tasks = Enum.map xs, fn x ->
       Task.async(fn -> op.(x) end)
