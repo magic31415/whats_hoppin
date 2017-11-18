@@ -8,7 +8,7 @@
       <div class="card-block">
         <h3 class="card-title"><strong><%= state.name %></strong></h3>
         <p class="card-text">...residents like to drink beer <br /></p>
-        <span><%= link "View Breweries", to: state_path(@conn, :show, state), class: "btn-default btn-md" %></span>
+        <p style="margin-bottom: 10px;"><%= link "View Breweries", to: state_path(@conn, :show, state), class: "btn btn-primary" %></p>
       </div>
     </div>
   </div>
