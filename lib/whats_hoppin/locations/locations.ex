@@ -8,6 +8,14 @@ defmodule WhatsHoppin.Locations do
 
   alias WhatsHoppin.Locations.Brewery
 
+
+  def get_brewery_image_medium(%{medium_pic_url: med, large_pic_url: lrg}) do
+    case med do
+      "" -> lrg
+      _  -> med
+    end
+  end
+
   @doc """
   Returns the list of breweries.
 

@@ -1,29 +1,32 @@
-<h4><%= link @brewery.name, to: @brewery.website %>
-    <span class="text-muted"><%= "(#{@brewery.city}, #{@brewery.state})" %></span>
-</h4>
 
-<ul>
-
-  <li>
-    <strong>Established date:</strong>
-    <%= @brewery.established_date %>
-  </li>
-
-  <li>
-    <strong>Mass Owned?:</strong>
+<div style="text-align: center;">
+  <h2><%= link @brewery.name, to: @brewery.website %>
+      <span class="text-muted"><%= "(#{@brewery.city}, #{@brewery.state})" %></span>
+  </h2>
+  <div class="container">
+    <div class="thumbnail">
+      <img class="" src="<%= @brewery.large_pic_url %>" alt="" width="300" height="300">
+    </div>
+  </div>
+  <p class="text-muted" style="text-align: left;"><%= @brewery.desc%></p>
+  <h4>
+    <strong>Est. </strong><%= @brewery.established_date %>
+  </h4>
+  <h4>
+    <strong>Location Type: </strong><%= @brewery.location_type %>
+  </h4>
+  <h4>
+    <strong>Mass Owned?: </strong>
     <%= if @brewery.is_mass_owned? do %>
       Yes
     <% else %>
       No
     <% end %>
-  </li>
+  </h4>
+</div>
 
-  <li>
-    <strong>Location type:</strong>
-    <%= @brewery.location_type %>
-  </li>
+<ul>
 
-</ul>
 
 <%# selection of beers made by this brewery, if possible - some breweries have no beers
     linked to them on brewryDB %>
