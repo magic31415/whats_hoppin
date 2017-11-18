@@ -1,12 +1,12 @@
 <%# TODO probably not secure %>
 <div id="is-forum" data-is-forum="true" hidden></div> 
 
-<h2 id="forum-name" data-forum-id="<%= @style.styleId %>"><%= @style.name %></h2>
-<div class="row" style="margin-left: 5px;">
+<div style="text-align: center;">
+  <h2 id="forum-name" style="text-align: center;" data-forum-id="<%= @style.styleId %>"><%= @style.name %></h2>
   <p class="text-muted"><%= @style.desc %></p>
+  <h4><%= Beer.gen_abv_text(@style) %></h4>
+  <h4><%= Beer.gen_ibu_text(@style) %></h4>
 </div>
-<h4 class="d-inline mr-5"><%= Beer.gen_abv_text(@style) %></h4>
-<h4><%= Beer.gen_ibu_text(@style) %></h4>
 
 <%# Form for posting a message %>
 <div class="form-group mt-5">
