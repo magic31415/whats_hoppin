@@ -50,7 +50,7 @@
     <tr>
       <th>Beers in this style...</th>
     </tr>
-      <%= for beer <- @random_beers do %>
+      <%= for beer <- WhatsHoppin.Beer.get_beers_in_style_parallel(@style) do %>
       <tr>
         <td>
           <a href="#" title="Description" data-toggle="hover" data-trigger="hover" 

@@ -16,21 +16,21 @@ defmodule WhatsHoppin.Beer do
       Task.async(fn -> op.(x) end)
     end
     a = Enum.map tasks, fn t ->
-      Task.await(t, 1000)
+      Task.await(t, 10000)
     end
     List.flatten(a)
   end
 
   def get_beers_with_style(styleId, page_num) do
-    path("beers", "styleId", 14)
+    path("beers", "styleId", styleId)
     |> add_attr_to_path("p", page_num)
     |> get_path
     |> elem(0)
   end
 
   def get_beers_in_style_parallel(%{styleId: styleId, number_beer_pages: num_pages}) do
-    num_pages = 
-    if num_pages >= 10 do 10 else num_pages end
+    # num_pages = 
+    # if num_pages >= 10 do 10 else num_pages end
 
     parallel_map 1..num_pages, fn page_num ->
       get_beers_with_style(styleId, page_num)
