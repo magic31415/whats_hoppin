@@ -41,6 +41,13 @@ defmodule WhatsHoppin.Beer do
   # Stuff for formatting HTML data
   ################################################
 
+  def format_style_number_of_beers_display(%{number_beer_pages: num_beer_pages}) do
+    case num_beer_pages do
+      1 -> "< 50"
+      _ -> "#{(num_beer_pages - 1) * 50} - #{num_beer_pages * 50}"
+    end
+  end
+
   def format_beer_description(beer) do
     failStr = "No description available."
     desc = 

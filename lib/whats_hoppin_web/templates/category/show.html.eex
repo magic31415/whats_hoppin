@@ -8,11 +8,15 @@
       <div class="card-block">
         <h3 class="card-title"><strong><%= s.name %></strong></h3>
         <p class="card-text">
+          <strong>Beers in Style: <%= WhatsHoppin.Beer.format_style_number_of_beers_display(s) %></strong>
+        </p>
+        <p class="card-text">
         	<strong>ABV Range:</strong> <%= #{s.abvMin}% %> - <%= #{s.abvMax}% %>
         </p>
         <p class="card-text">
         	<strong>IBU Range:</strong> <%= s.ibuMin %> - <%= s.ibuMax %>
         </p>
+
         <span><%= link "View Style", to: style_path(@conn, :show, s), class: "btn-default btn-md" %></span>
       </div>
     </div>
