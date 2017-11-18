@@ -14,6 +14,8 @@ defmodule WhatsHoppin.Beer.Style do
     field :category_id, :integer
     field :desc, :string
 
+    field :number_beer_pages, :integer
+
     # belongs_to :category, WhatsHoppin.Beer.Style, foreign_key: :category_id
 
     timestamps()
@@ -22,7 +24,7 @@ defmodule WhatsHoppin.Beer.Style do
   @doc false
   def changeset(%Style{} = style, attrs) do
     style
-    |> cast(attrs, [:styleId, :name, :ibuMin, :ibuMax, :abvMin, :abvMax, :category_id, :desc])
+    |> cast(attrs, [:styleId, :name, :ibuMin, :ibuMax, :abvMin, :abvMax, :category_id, :desc, :number_beer_pages])
     # TODO are all these required? Not all of them are always present
     |> validate_required([:styleId, :name, :ibuMin, :ibuMax, :abvMin, :abvMax, :category_id, :desc])
   end

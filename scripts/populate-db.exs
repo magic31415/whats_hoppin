@@ -47,6 +47,12 @@ defmodule Populator do
 		abvMin = Map.get(s, "abvMin", "")
 		abvMax = Map.get(s, "abvMax", "")
 
+		# make an HTTP request for beers with this style to find out how many pages of beer there are
+		# for this style
+		num_beer_pages = 
+		BeerData.get_resource("beers", "styleId", styleId)
+		|> elem(1)
+
 		case ss = Repo.get_by(Style, styleId: styleId) do
 			
 			# create it!
@@ -54,7 +60,8 @@ defmodule Populator do
 				Repo.insert!(%Style
 					{styleId: styleId, category_id: categoryId,
 					name: name, desc: desc, ibuMin: ibuMin, 
-					ibuMax: ibuMax, abvMin: abvMin,abvMax: abvMax}
+					ibuMax: ibuMax, abvMin: abvMin,abvMax: abvMax,
+					number_beer_pages: num_beer_pages}
 				)
 
 			# update it!
@@ -62,7 +69,8 @@ defmodule Populator do
 				ss = Ecto.Changeset.change(ss, 
 					styleId: styleId, category_id: categoryId,
 					name: name, desc: desc, ibuMin: ibuMin, 
-					ibuMax: ibuMax, abvMin: abvMin,abvMax: abvMax
+					ibuMax: ibuMax, abvMin: abvMin,abvMax: abvMax,
+					number_beer_pages: num_beer_pages
 				)
 				case Repo.update(ss) do
 					{:ok, struct} ->
@@ -94,6 +102,7 @@ defmodule Populator do
 		end
 		website = Map.get(brewery, "website", "")
 		established_date = Map.get(brewery, "established", "")
+		desc = Map.get(brewery, "description", "")
 
 		case ll = Repo.get_by(Brewery, brewery_id: brewery_id) do
 			
@@ -102,7 +111,8 @@ defmodule Populator do
 				Repo.insert!(%Brewery
 					{city: city, state: state, location_type: location_type,
 					brewery_id: brewery_id, name: name, is_mass_owned?: is_mass_owned,
-					website: website, established_date: established_date}
+					website: website, established_date: established_date,
+					desc: desc}
 				)
 
 			# update it!
@@ -110,7 +120,8 @@ defmodule Populator do
 				ll = Ecto.Changeset.change(ll, 
 					city: city, state: state, location_type: location_type,
 					brewery_id: brewery_id, name: name, is_mass_owned?: is_mass_owned,
-					website: website, established_date: established_date
+					website: website, established_date: established_date,
+					desc: desc
 				)
 				case Repo.update(ll) do
 					{:ok, struct} ->

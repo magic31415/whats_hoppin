@@ -10,6 +10,31 @@ defmodule WhatsHoppin.Beer do
   alias WhatsHoppin.Beer.Style
 
 
+  # taken from Nat Tuck's lecture notes about asynchronous operations using Task
+  defp parallel_map(xs, op) do
+    tasks = Enum.map xs, fn x ->
+      Task.async(fn -> op.(x) end)
+    end
+    Enum.map tasks, fn t ->
+      Task.await(t, 1000)
+    end
+  end
+
+  def get_beers_with_style(styleId) do
+    get_resource("beers", "styleId", styleId)
+    |> elem(0)
+    IO.puts("Got page #{styleId}")
+  end
+
+  def get_beers_in_style_parallel(%{styleId: styleId, number_beer_pages: num_pages}) do
+    num_pages = 
+    if num_pages >= 10 do 10 else num_pages end
+
+    parallel_map 1..num_pages, fn styleId ->
+      get_beers_with_style (styleId)
+    end
+  end
+
   ################################################
   # Stuff for formatting HTML data
   ################################################

@@ -14,13 +14,15 @@ defmodule WhatsHoppin.Locations.Brewery do
     field :state, :string
     field :website, :string
 
+    field :desc, :string
+
     timestamps()
   end
 
   @doc false
   def changeset(%Brewery{} = brewery, attrs) do
     brewery
-    |> cast(attrs, [:name, :website, :city, :state, :established_date, :is_mass_owned?, :location_type, :brewery_id])
+    |> cast(attrs, [:name, :website, :city, :state, :established_date, :is_mass_owned?, :location_type, :brewery_id, :desc])
     |> validate_required([:name, :website, :city, :state, :established_date, :is_mass_owned?, :location_type, :brewery_id])
   end
 end
