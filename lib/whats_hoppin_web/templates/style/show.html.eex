@@ -46,7 +46,7 @@
   </div>
 </div> <%# col-8 %>
 
-<div class="col-4" style="text-align: center; height: 600px; overflow-y: scroll;">
+<div class="col-4" style="max-width: 1000px; text-align: center; height: 1000px; overflow: auto;">
   <%# render a random selection of beers within the style %>
   <table class="table" style="background-color:powderblue; border: 5px solid grey;">
     <tbody id="table-body-beer">
@@ -56,7 +56,7 @@
       <%= for beer <- WhatsHoppin.Beer.get_beers_in_style_parallel(@style) do %>
       <tr>
         <td>
-          <a href="#" title="Description" data-toggle="hover" data-trigger="hover" 
+          <a href="#" title="Description" data-toggle="hover" data-trigger="hover" data-placement="top"
           data-content="<%= WhatsHoppin.Beer.format_beer_description(beer) %>">
           <%= Map.get(beer, "name") %></a>
         </td>

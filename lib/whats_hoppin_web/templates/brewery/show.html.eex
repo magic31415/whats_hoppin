@@ -37,23 +37,33 @@
 
 <% else %>
 
-<div class="col-4" style="text-align: center; height: 600px; overflow-y: scroll;">
-  <table class="table" style="background-color:powderblue; border: 5px solid grey;">
-    <tbody id="table-body-beer">
-      <tr>
-        <th>Beers by <%= @brewery.name %>...</th>
-      </tr>
-      <%= for beer <- @brewery_beers do %>
-      <tr>
-        <td>
-          <a href="#" title="Description" data-toggle="hover" data-trigger="hover" 
-          data-content="<%= Map.get(beer, "description") %>">
-          <%= Map.get(beer, "name") %></a>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<div class="row">
 
-<% end %>
+  <div class="col-8">
+
+    <%# put messages here %>
+
+  </div>
+
+  <div class="col-4" style="max-width: 1000px; text-align: center; height: 1000px; overflow: auto;">
+    <table class="table" style="background-color:powderblue; border: 5px solid grey;">
+      <tbody id="table-body-beer">
+        <tr>
+          <th>Beers by <%= @brewery.name %>...</th>
+        </tr>
+        <%= for beer <- @brewery_beers do %>
+        <tr>
+          <td>
+            <a href="#" title="Description" data-toggle="hover" data-trigger="hover" data-placement="top"
+            data-content="<%= Map.get(beer, "description") %>">
+            <%= Map.get(beer, "name") %></a>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <% end %>
+
+</div> <%# row %>
