@@ -3,6 +3,13 @@
 
 <div style="text-align: center;">
   <h2 id="forum-name" style="text-align: center;" data-forum-id="<%= @style.styleId %>"><%= @style.name %></h2>
+  <div class="container">
+    <div class="thumbnail">
+      <img class="" style="height: 150px; width: 150px; margin-bottom: 20px" 
+      src="<%= static_path(@conn, "/images/two_beers_icon.png") %>" 
+      width="150" height="150">
+    </div>
+  </div>
   <p class="text-muted"><%= @style.desc %></p>
   <h4><%= Beer.gen_abv_text(@style) %></h4>
   <h4><%= Beer.gen_ibu_text(@style) %></h4>

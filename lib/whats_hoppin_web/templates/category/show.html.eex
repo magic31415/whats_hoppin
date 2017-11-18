@@ -7,17 +7,19 @@
     <div class="card" style="background-color: powderblue; border: 3px solid grey;">
       <div class="card-block">
         <h3 class="card-title"><strong><%= s.name %></strong></h3>
+        <div class="container">
+          <div class="thumbnail">
+            <img class="" style="height: 150px; width: 150px; margin-bottom: 20px" 
+            src="<%= static_path(@conn, "/images/two_beers_icon.png") %>" 
+            width="150" height="150">
+          </div>
+        </div>
         <p class="card-text">
           <strong>Beers in Style: <%= WhatsHoppin.Beer.format_style_number_of_beers_display(s) %></strong>
+          <br /><strong>ABV Range:</strong> <%= #{s.abvMin}% %> - <%= #{s.abvMax}% %>
+          <br /><strong>IBU Range:</strong> <%= s.ibuMin %> - <%= s.ibuMax %>
         </p>
-        <p class="card-text">
-        	<strong>ABV Range:</strong> <%= #{s.abvMin}% %> - <%= #{s.abvMax}% %>
-        </p>
-        <p class="card-text">
-        	<strong>IBU Range:</strong> <%= s.ibuMin %> - <%= s.ibuMax %>
-        </p>
-
-        <span><%= link "View Style", to: style_path(@conn, :show, s), class: "btn-default btn-md" %></span>
+        <p style="margin-bottom: 10px;"><%= link "View Style", to: style_path(@conn, :show, s), class: "btn btn-primary" %></p>
       </div>
     </div>
   </div>

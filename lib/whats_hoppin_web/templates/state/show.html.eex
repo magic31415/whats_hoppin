@@ -19,7 +19,7 @@
           </div>
         </div>
         <p class="card-text"><%= "(#{brewery.city})" %></p>
-        <span><%= link "View Brewery", to: brewery_path(@conn, :show, brewery), class: "btn-default btn-xs" %></span>
+        <p style="margin-bottom: 10px;"><%= link "View Brewery", to: brewery_path(@conn, :show, brewery), class: "btn btn-primary" %></p>
       </div>
     </div>
   </div>
