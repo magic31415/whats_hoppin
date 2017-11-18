@@ -7,7 +7,9 @@
     <div class="card" style="background-color: powderblue; border: 3px solid grey;">
       <div class="card-block">
         <h3 class="card-title"><strong><%= c.name %></strong></h3>
-        <p class="card-text">...</p>
+        <p class="card-text">
+          <strong>Number of Beers: <%= WhatsHoppin.Beer.format_category_number_of_beers_display(c) %></strong>
+        </p>
         <span><%= link "View Styles", to: category_path(@conn, :show, c), class: "btn-default btn-md" %></span>
       </div>
     </div>

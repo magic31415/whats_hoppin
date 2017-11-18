@@ -41,11 +41,21 @@ defmodule WhatsHoppin.Beer do
   # Stuff for formatting HTML data
   ################################################
 
-  def format_style_number_of_beers_display(%{number_beer_pages: num_beer_pages}) do
+  defp format_number_of_beers_display(num_beer_pages) do
     case num_beer_pages do
       1 -> "< 50"
       _ -> "#{(num_beer_pages - 1) * 50} - #{num_beer_pages * 50}"
     end
+  end
+
+  def format_style_number_of_beers_display(%{number_beer_pages: num_beer_pages}) do
+    format_number_of_beers_display(num_beer_pages)
+  end
+
+  def format_category_number_of_beers_display(category) do
+    get_styles_by_category(category)
+    |> List.foldr(0, fn style, acc -> style.number_beer_pages + acc end)
+    |> format_number_of_beers_display
   end
 
   def format_beer_description(beer) do
@@ -234,10 +244,7 @@ defmodule WhatsHoppin.Beer do
   def get_category!(id), do: Repo.get!(Category, id)
 
   def get_styles_by_category(c) do
-    IO.puts("Querying for styles with category id #{c.category_id}...")
-    res = Repo.all(from s in Style, where: s.category_id == ^c.category_id)
-    IO.puts("Number of styles: #{length res}")
-    res
+    Repo.all(from s in Style, where: s.category_id == ^c.category_id)
   end
 
   @doc """
