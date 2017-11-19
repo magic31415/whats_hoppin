@@ -25,12 +25,12 @@ $(function () {
 	// activate all hover-over popover windows
 	$('[data-toggle="hover"]').popover();
 
-	var max = 0;
-	for (var i = 0 ; i < $(".card").length; i++) {
-		var thisHeight = $(".card").eq(i).height();
-		max = thisHeight >= max ? thisHeight : max;
-  	}
+	let max = 0;
+	for (let i = 0 ; i < $(".card").length; i++) {
+		let thisHeight = $(".card").eq(i).height();
+		max = (thisHeight >= max) ? thisHeight : max;
+  }
 
-  	// set all cards to the same height
+  // set all cards to the same height
 	$(".card").height(max);
 });

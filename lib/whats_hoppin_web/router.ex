@@ -16,15 +16,16 @@ defmodule WhatsHoppinWeb.Router do
   scope "/", WhatsHoppinWeb do
     pipe_through :browser # Use the default browser stack
 
+    get "/", PageController, :index
+
     resources "/categories", CategoryController, only: [:show, :index]
-    resources "/styles", StyleController, only: [:show, :index]
+    resources "/styles", StyleController, only: [:show]
 
     resources "/states", StateController, only: [:index, :show]
-    resources "/breweries", BreweryController, only: [:show, :index]
+    resources "/breweries", BreweryController, only: [:show]
 
-	resources "/messages", MessageController
-
-    get "/", PageController, :index
+    # TODO which resources
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.

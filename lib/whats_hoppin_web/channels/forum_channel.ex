@@ -11,7 +11,7 @@ defmodule WhatsHoppinWeb.ForumChannel do
     end
   end
 
-  # Add authorization logic here as required.
+  # TODO Add authorization logic here as required.
   defp authorized?(_payload) do
     true
   end

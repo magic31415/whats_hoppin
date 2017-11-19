@@ -1,2 +1,35 @@
 /* This file is for your main application css. */
 @import "bootstrap";
+
+#beer-list-div {
+	max-width: 1000px;
+	height: 1000px;
+	overflow: auto;
+}
+
+#beer-list-table {
+	background-color: powderblue;
+	border: 5px solid grey;
+}
+
+.center {
+	text-align: center;
+}
+
+.left {
+	text-align: left;
+}
+
+.default-image {
+	height: 150px;
+	width: 150px;
+}
+
+.blue-card {
+	background-color: powderblue;
+	border: 3px solid grey;
+}
+
+.error-text {
+	color: red;
+}

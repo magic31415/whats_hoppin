@@ -13,7 +13,7 @@
 
   <body>
     <div class="container">
-      <nav class="navbar navbar-dark bg-secondary navbar-expand-md" style="margin-bottom: 20px;">
+      <nav class="navbar navbar-dark bg-secondary navbar-expand-md mb-3">
         <%= link("Home", to: page_path(@conn, :index)) %>
 
         <button class="navbar-toggler" type="button"
@@ -24,12 +24,14 @@
         <div class="collapse navbar-collapse" id="main-navbar">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <%= link "Breweries by State", to: state_path(@conn, :index),
-                                   class: "nav-link" %>
+              <%= link "Breweries by State",
+                  to: state_path(@conn, :index),
+                  class: "nav-link" %>
             </li>
             <li class="nav-item active">
-              <%= link "Beer Categories", to: category_path(@conn, :index),
-                                   class: "nav-link" %>
+              <%= link "Beer Categories",
+                  to: category_path(@conn, :index),
+                  class: "nav-link" %>
             </li>
           </ul>
         </div>

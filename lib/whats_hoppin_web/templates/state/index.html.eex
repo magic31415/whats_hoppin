@@ -1,20 +1,25 @@
-<h2 style="margin-top: 10px; text-align: center;">Browse Breweries by State...</h2>
+<h2 class="center mt-3">Browse Breweries by State...</h2>
 
-
-<div class="row" style="margin-top: 25px;">
-<%= for state <- @states do %>
-  <div class="col-sm-3" style="text-align: center; margin-top: 20px;">
-    <div class="card" style="background-color: powderblue; border: 3px solid grey;">
-      <div class="card-block">
-        <h3 class="card-title"><strong><%= state.name %></strong></h3>
-        <p class="card-text">...residents like to drink beer <br /></p>
-        <p style="margin-bottom: 10px;"><%= link "View Breweries", to: state_path(@conn, :show, state), class: "btn btn-primary" %></p>
+<div class="row mt-3">
+  <%= for state <- @states do %>
+    <div class="col-sm-3 center mt-3">
+      <div class="card blue-card">
+        <div class="card-block">
+          <h3 class="card-title">
+            <strong><%= state.name %></strong>
+          </h3>
+          <p class="card-text mb-1">...residents like to drink beer</p>
+          <p class="mb-2">
+            <%= link "View Breweries",
+                to: state_path(@conn, :show, state),
+                class: "btn btn-primary" %></p>
+        </div>
       </div>
     </div>
-  </div>
- <% end %>
- </div> <%# row %>
+   <% end %>
+ </div>
 
-<div class="row" style="margin-top: 20px;">
+<%# TODO do we need this %>
+<div class="row mt-3">
   <span><%= link "Homepage", to: page_path(@conn, :index) %></span>
 </div>

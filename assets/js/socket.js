@@ -1,5 +1,6 @@
 import {Socket} from "phoenix"
 export default socket
+// TODO remove react
 // import React from 'react';
 // import ReactDOM from 'react-dom';
 
@@ -68,16 +69,16 @@ function got_create(msg) {
 			'<tr id="message-' + msg.id + '"> \
 	  		<td id="content-' + msg.id + '">' + msg.content + '</td> \
 	  		<td class="text-right"> \
-	  			<span><a href="#" \
+	  			<span><a href="#a" \
 	  							 class="btn btn-outline-warning btn-xs edit-button" \
 	  							 id="edit-' + msg.id + '">Edit</a></span> \
-	  			<span><a href="#" \
+	  			<span><a href="#a" \
 	  							 class="btn btn-danger btn-xs delete-button" \
 	  							 id="delete-' + msg.id + '">Delete</a></span> \
 	  		</td> \
 	  	</tr>';
 
-		$('tbody').prepend(message_row);
+		$('tbody#messages-table-body').prepend(message_row);
 		add_event_listeners(msg.id);
 	}
 }
