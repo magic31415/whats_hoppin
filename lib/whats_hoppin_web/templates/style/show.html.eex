@@ -1,9 +1,19 @@
 <%# TODO probably not secure %>
 <div id="is-forum" data-is-forum="true" hidden></div> 
 
-<h2 id="forum-name" data-forum-id="<%= @style.styleId %>"><%= @style.name %></h2>
-<h4 class="d-inline mr-5"><%= Beer.gen_abv_text(@style) %></h4>
-<h4 class="d-inline"><%= Beer.gen_ibu_text(@style) %></h4>
+<div style="text-align: center;">
+  <h2 id="forum-name" style="text-align: center;" data-forum-id="<%= @style.styleId %>"><%= @style.name %></h2>
+  <div class="container">
+    <div class="thumbnail">
+      <img class="" style="height: 150px; width: 150px; margin-bottom: 20px" 
+      src="<%= static_path(@conn, "/images/two_beers_icon.png") %>" 
+      width="150" height="150">
+    </div>
+  </div>
+  <p class="text-muted"><%= @style.desc %></p>
+  <h4><%= Beer.gen_abv_text(@style) %></h4>
+  <h4><%= Beer.gen_ibu_text(@style) %></h4>
+</div>
 
 <%# Form for posting a message %>
 <div class="form-group mt-5">
@@ -17,22 +27,50 @@
                                data_forum_id: @style.id %></div>
 
 <%# Messages %>
-<table class="table">
-  <tbody id="table-body">
-  <%= for message <- @messages do %>
-    <tr id="message-<%= message.id %>">
-      <td id="content-<%= message.id %>"><%= message.content %></td>
-      <td class="text-right">
-        <span><%= link "Edit",
-                  to: "#",
-                  class: "btn btn-outline-warning btn-xs edit-button",
-                  id: "edit-#{message.id}" %></span>
-        <span><%= link "Delete",
-                  to: "#",
-                  class: "btn btn-danger btn-xs delete-button",
-                  id: "delete-#{message.id}" %></span>
-      </td>
+<div class="row">
+
+<div class="col-8">
+  <div class="col-bordered">
+    <table class="table">
+      <tbody id="table-body">
+      <%= for message <- @messages do %>
+        <tr id="message-<%= message.id %>">
+          <td id="content-<%= message.id %>"><%= message.content %></td>
+          <td class="text-right">
+            <span><%= link "Edit",
+                      to: "#",
+                      class: "btn btn-outline-warning btn-xs edit-button",
+                      id: "edit-#{message.id}" %></span>
+            <span><%= link "Delete",
+                      to: "#",
+                      class: "btn btn-danger btn-xs delete-button",
+                      id: "delete-#{message.id}" %></span>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div> <%# col-8 %>
+
+<div class="col-4" style="max-width: 1000px; text-align: center; height: 1000px; overflow: auto;">
+  <%# render a random selection of beers within the style %>
+  <table class="table" style="background-color:powderblue; border: 5px solid grey;">
+    <tbody id="table-body-beer">
+    <tr>
+      <th>Beers in this style...</th>
     </tr>
-    <% end %>
-  </tbody>
-</table>
+      <%= for beer <- WhatsHoppin.Beer.get_beers_in_style_parallel(@style) do %>
+      <tr>
+        <td>
+          <a href="#" title="Description" data-toggle="hover" data-trigger="hover" data-placement="top"
+          data-content="<%= WhatsHoppin.Beer.format_beer_description(beer) %>">
+          <%= Map.get(beer, "name") %></a>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> <%# col-4 %>
+
+</div> <%# row %>

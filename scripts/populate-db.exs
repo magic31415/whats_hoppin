@@ -47,6 +47,12 @@ defmodule Populator do
 		abvMin = Map.get(s, "abvMin", "")
 		abvMax = Map.get(s, "abvMax", "")
 
+		# make an HTTP request for beers with this style to find out how many pages of beer there are
+		# for this style
+		num_beer_pages = 
+		BeerData.get_resource("beers", "styleId", styleId)
+		|> elem(1)
+
 		case ss = Repo.get_by(Style, styleId: styleId) do
 			
 			# create it!
@@ -54,7 +60,8 @@ defmodule Populator do
 				Repo.insert!(%Style
 					{styleId: styleId, category_id: categoryId,
 					name: name, desc: desc, ibuMin: ibuMin, 
-					ibuMax: ibuMax, abvMin: abvMin,abvMax: abvMax}
+					ibuMax: ibuMax, abvMin: abvMin,abvMax: abvMax,
+					number_beer_pages: num_beer_pages}
 				)
 
 			# update it!
@@ -62,7 +69,8 @@ defmodule Populator do
 				ss = Ecto.Changeset.change(ss, 
 					styleId: styleId, category_id: categoryId,
 					name: name, desc: desc, ibuMin: ibuMin, 
-					ibuMax: ibuMax, abvMin: abvMin,abvMax: abvMax
+					ibuMax: ibuMax, abvMin: abvMin,abvMax: abvMax,
+					number_beer_pages: num_beer_pages
 				)
 				case Repo.update(ss) do
 					{:ok, struct} ->
@@ -94,6 +102,15 @@ defmodule Populator do
 		end
 		website = Map.get(brewery, "website", "")
 		established_date = Map.get(brewery, "established", "")
+		desc = Map.get(brewery, "description", "")
+
+		# only look for image URLS is the key exists
+		icon_url = medium_pic_url = large_pic_url = ""
+		if images_map = Map.get(brewery, "images") do
+			icon_url = Map.get(images_map, "icon", "")
+			medium_pic_url = Map.get(images_map, "squareMedium") || Map.get(images_map, "medium", "")
+			large_pic_url = Map.get(images_map, "squareLarge") || Map.get(images_map, "large", "")
+		end
 
 		case ll = Repo.get_by(Brewery, brewery_id: brewery_id) do
 			
@@ -102,7 +119,9 @@ defmodule Populator do
 				Repo.insert!(%Brewery
 					{city: city, state: state, location_type: location_type,
 					brewery_id: brewery_id, name: name, is_mass_owned?: is_mass_owned,
-					website: website, established_date: established_date}
+					website: website, established_date: established_date,
+					desc: desc, icon_url: icon_url, medium_pic_url: medium_pic_url,
+					large_pic_url: large_pic_url}
 				)
 
 			# update it!
@@ -110,7 +129,9 @@ defmodule Populator do
 				ll = Ecto.Changeset.change(ll, 
 					city: city, state: state, location_type: location_type,
 					brewery_id: brewery_id, name: name, is_mass_owned?: is_mass_owned,
-					website: website, established_date: established_date
+					website: website, established_date: established_date,
+					desc: desc, medium_pic_url: medium_pic_url,
+					large_pic_url: large_pic_url
 				)
 				case Repo.update(ll) do
 					{:ok, struct} ->
@@ -130,10 +151,10 @@ defmodule Populator do
 
 end
 
-HTTPoison.start
-IO.puts("Updating categories...")
-Populator.update_categories()
-IO.puts("\n\n\nUpdating styles...")
-Populator.update_styles()
-IO.puts("\n\n\nUpdating breweries...")
+# HTTPoison.start
+# IO.puts("Updating categories...")
+# Populator.update_categories()
+# IO.puts("\n\n\nUpdating styles...")
+# Populator.update_styles()
+IO.puts("\n\n\nUpdating breweries...\n(this may take a while, but its not hanging)")
 Populator.update_breweries()

@@ -1,22 +1,22 @@
-<h2>Listing Categories</h2>
+<h2 style="margin-top: 10px; text-align: center;">Browse Beer Categories...</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for category <- @categories do %>
-    <tr>
-      <td><strong><%= category.name %></strong></td>
+<div class="row justify-content-center" style="margin-top: 25px;">
+<%= for c <- @categories do %>
+  <div class="col-sm-5" style="text-align: center; margin-top: 20px;">
+    <div class="card" style="background-color: powderblue; border: 3px solid grey;">
+      <div class="card-block">
+        <h3 class="card-title"><strong><%= c.name %></strong></h3>
+        <p class="card-text">
+          <strong>Number of Beers: <%= WhatsHoppin.Beer.format_category_number_of_beers_display(c) %></strong>
+        </p>
+        <p style="margin-bottom: 10px;"><%= link "View Styles", to: category_path(@conn, :show, c), class: "btn btn-primary" %></p>
+      </div>
+    </div>
+  </div>
+ <% end %>
+ </div> <%# row %>
 
-      <td class="text-right">
-        <span><%= link "Show", to: category_path(@conn, :show, category), class: "btn btn-default btn-xs" %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+<div class="row" style="margin-top: 20px;">
+  <span><%= link "Homepage", to: page_path(@conn, :index) %></span>
+</div>

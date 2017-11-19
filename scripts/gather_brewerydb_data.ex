@@ -69,7 +69,16 @@ defmodule BeerData do
 	@spec get_path(String) :: {Map, Integer}
 	def get_path(full_path) do
 		full_path
-		|> HTTPoison.get!
+		|> HTTPoison.get
+		|> 
+
+		# if there's an error (like a timeout), just try the request again
+		(fn(res) ->
+			case res do
+				{:error, _} -> get_path(full_path)
+				{:ok, resp} -> resp
+			end 
+		end).()
 		# result of Poison.decode/1 is (ex:) {:ok, %{"data": [], "numberOfPages": X}}
 		|> (fn(resp) -> Poison.decode(resp.body) end).()
 		|> elem(1)
