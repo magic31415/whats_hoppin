@@ -17,7 +17,6 @@
             </div>
           </div>
           <p class="card-text">
-            <%# TODO Why do we need this %>
             <p class="mb-0">
               <strong>
                 Beers in Style: <%= WhatsHoppin.Beer.format_style_number_of_beers_display(style) %>
@@ -38,8 +37,3 @@
     </div>
    <% end %>
  </div>
-
-<%# TODO Do we need this %>
-<div class="row mt-4">
-  <span><%= link "Browse by Category", to: category_path(@conn, :index) %></span>
-</div>

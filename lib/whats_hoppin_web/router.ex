@@ -29,7 +29,7 @@ defmodule WhatsHoppinWeb.Router do
     resources "/breweries", BreweryController, only: [:show]
 
     # TODO which resources
-    resources "/users", UserController
+    resources "/users", UserController, only: [:edit, :update, :new, :create]
 
     post "/sessions", SessionController, :login
     delete "/sessions", SessionController, :logout

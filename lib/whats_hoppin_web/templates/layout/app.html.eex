@@ -39,7 +39,7 @@
               <%= link "Log Out",
                         to: session_path(@conn, :logout),
                         method: :delete,
-                        class: "btn btn-outline-warning"%>
+                        class: "btn btn-outline-warning" %>
             </span>
           <% else %>
             <%= form_for @conn, session_path(@conn, :login),

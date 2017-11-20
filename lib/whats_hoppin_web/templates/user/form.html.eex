@@ -38,5 +38,3 @@
     <%= submit "Create Account", class: "btn btn-primary" %>
   </div>
 <% end %>
-
-<%# TODO back button %>

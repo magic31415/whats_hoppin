@@ -18,8 +18,3 @@
     </div>
    <% end %>
  </div>
-
-<%# TODO do we need this %>
-<div class="row mt-3">
-  <span><%= link "Homepage", to: page_path(@conn, :index) %></span>
-</div>

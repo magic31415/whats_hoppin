@@ -34,10 +34,10 @@
         <tbody id="messages-table-body">
         <%= for message <- @messages do %>
           <tr id="message-<%= message.id %>">
-            <td>
+            <td id="author-<%= message.id %>">
               <strong><%= WhatsHoppin.Forum.get_user!(message.user_id).username %>: </strong>
-              <div id="content-<%= message.id %>"><%= message.content %></div>
             </td>
+            <td id="content-<%= message.id %>"><%= message.content %></td>
             <%= if @current_user != nil && @current_user.id == message.user_id do %>
               <td class="text-right">
                 <span><%= link "Edit",

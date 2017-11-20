@@ -1,13 +1,14 @@
 <div class="jumbotron center">
-  <h2>WhatsHoppin?</h2>
-  <p class="lead">Join the conversation with other beer lovers!</p>
+  <h2 class="display-1">WhatsHoppin?</h2>
+  <p class="lead display-4">Join the conversation with other beer lovers!</p>
+  <p class="display-1">
+  	<img src="https://s3.amazonaws.com/brewerydbapi/brewery/7EhKvb/upload_fiHFSq-squareMedium.png">
+  	<img src="https://s3.amazonaws.com/brewerydbapi/brewery/umzSBk/upload_JXtYcm-squareMedium.png">
+  	<img src="https://s3.amazonaws.com/brewerydbapi/brewery/iA45eM/upload_nZZ1UE-squareMedium.png">
+  </p>
+  <p class="display-4">Log in above or <%= link "sign up", to: user_path(@conn, :new) %>
+  <p class="display-4">or search for a
+  	                   <%= link "style", to: category_path(@conn, :index) %> or a
+  	                   <%= link "brewery", to: state_path(@conn, :index) %>.
+  </p>
 </div>
-
-<div class="row text-center justify-content-center">
-    <%= link "Browse Breweries by State", to: state_path(@conn, :index), class: "btn btn-primary"%>
-</div>
-
-<div class="row text-center justify-content-center">
-    <%= link "Browse Beers by Category", to: category_path(@conn, :index), class: "btn btn-primary"%>
-</div>
-

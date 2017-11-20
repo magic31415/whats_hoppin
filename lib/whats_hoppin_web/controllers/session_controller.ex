@@ -2,7 +2,6 @@
 # Session Controller from
 # https://github.com/NatTuck/nu_mart
 #
-
 defmodule WhatsHoppinWeb.SessionController do
   use WhatsHoppinWeb, :controller
 

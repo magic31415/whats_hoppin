@@ -46,15 +46,17 @@ $(channel_init);
 // TODO simplify
 function add_event_listeners(id) {
 	let messages = id ? $("#message-" + id) : $("[id^=message-]");
-	let edit_buttons = Array.from(messages.find("a.edit-button"));
-	let delete_buttons = Array.from(messages.find("a.delete-button"));
+	// let edit_buttons = Array.from(messages.find("a.edit-button"));
+	// let delete_buttons = Array.from(messages.find("a.delete-button"));
 
 	for (let i = 0; i < messages.length; i++) {
 		let message_id = messages[i].id.substring(8);
+		let edit_button = $("#edit-" + message_id);
+		let delete_button = $("#delete-" + message_id);
 
-		if(edit_buttons[i]) {
-			edit_buttons[i].addEventListener("click", edit_message(message_id));
-			delete_buttons[i].addEventListener("click", delete_message(message_id));
+		if(edit_button.length == 1) {
+			edit_button[0].addEventListener("click", edit_message(message_id));
+			delete_button[0].addEventListener("click", delete_message(message_id));
 		}
 	}
 }
@@ -77,7 +79,6 @@ function new_message(button) {
 
 // CREATE
 function got_create(msg) {
-	console.log(msg);
 	if(msg.forum_id == subtopic) {
 		let buttons = "";
 		
@@ -95,8 +96,8 @@ function got_create(msg) {
 
 	 	let message_row =
 			'<tr id="message-' + msg.id + '"> \
-	  		<td id="content-' + msg.id + '"><strong>' + msg.username + ": </strong>" + 
-	  																		msg.content + '</td>' +
+			  <td id="author-' + msg.id + '"><strong>' + msg.username + ': </strong>' + 
+	  		'<td id="content-' + msg.id + '">' + msg.content + '</td>' +
 	  			buttons +
 	  		'</td> \
 	  	</tr>';
@@ -110,15 +111,18 @@ function got_create(msg) {
 function edit_message(id) {
 	return function() {
 		let message = $("#message-" + id);
+		let author = $("#author-" + id);
 		let content = $("#content-" + id);
 		let edit_button = $("#edit-" + id);
 
 		if(edit_button.text() === "Edit") {
 			let input = '<td> \
 										<input type="text" id="content-' + id + '" value="' + content.text() + '"> \
-									</td>'
+									</td>';
+			author.remove();
 			content.remove();
 			message.prepend(input);
+			message.prepend(author);
 			edit_button.text('Update');
 		}
 		else {
@@ -127,8 +131,10 @@ function edit_message(id) {
 			chan.push("update", {id: id,
 			                     content: content_text,
 			                     forum_id: subtopic});
+			author.remove();
 			content.parent().remove();
 			message.prepend('<td id="content-' + id + '">' + content_text + '</td>');
+			message.prepend(author);
 		}
 	};
 }
