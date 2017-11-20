@@ -151,10 +151,10 @@ defmodule Populator do
 
 end
 
-# HTTPoison.start
-# IO.puts("Updating categories...")
-# Populator.update_categories()
-# IO.puts("\n\n\nUpdating styles...")
-# Populator.update_styles()
+HTTPoison.start
+IO.puts("Updating categories...")
+Populator.update_categories()
+IO.puts("\n\n\nUpdating styles...")
+Populator.update_styles()
 IO.puts("\n\n\nUpdating breweries...\n(this may take a while, but its not hanging)")
 Populator.update_breweries()
