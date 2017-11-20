@@ -20,6 +20,7 @@ defmodule WhatsHoppinWeb.ForumChannel do
     Forum.create_message(payload)
     message = Map.take(Forum.get_latest_message!,
                        [:id, :content, :forum_id, :user_id])
+    message = Map.put(message, :username, Forum.get_user!(message.user_id).username)
     broadcast! socket, "create", message
     {:noreply, socket}
   end

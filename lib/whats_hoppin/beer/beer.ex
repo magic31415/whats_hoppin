@@ -57,8 +57,9 @@ defmodule WhatsHoppin.Beer do
     |> format_number_of_beers_display
   end
 
+  # TODO I already do some of this
   def format_beer_description(beer) do
-    failStr = "No description available."
+    
     desc = 
     case d = Map.get(beer, "description") do
       nil -> "No description available."
@@ -223,7 +224,11 @@ defmodule WhatsHoppin.Beer do
 
   """
   def list_categories do
-    Repo.all(Category)
+    query = from c in Category,
+          where: c.name != "\"\"",
+          select: c
+
+    Repo.all(query)
   end
 
   @doc """
@@ -411,7 +416,7 @@ defmodule WhatsHoppin.Beer do
       dash = if min != "" && max != "" do " - " else "" end
       min <> dash <> max <> units
     else
-      ""
+      "No " <> units <> " Data"
     end
   end
 

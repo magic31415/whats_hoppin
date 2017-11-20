@@ -1,31 +1,29 @@
+<h2 class="center mt-2">Breweries in <%= @state.name %>...</h2>
 
-<h2 style="margin-top: 10px; text-align: center;">Breweries in <%= @state.name %>...</h2>
+<div class="row mt-4">
+  <%= for brewery <- @breweries_in_state do %>
+    <div class="col-sm-3 center mt-3">
+      <div class="card blue-card">
+        <div class="card-block">
+          <h3 class="card-title">
+            <strong><%= brewery.name %></strong>
+          </h3>
 
+          <% img_url = WhatsHoppin.Locations.get_brewery_image_medium(brewery) %>   
+          <% if img_url == "" do img_url = static_path(@conn, "/images/beer_icon.png") end %>
 
-<div class="row" style="margin-top: 25px;">
-<%= for brewery <- @breweries_in_state do %>
-  <div class="col-sm-3" style="text-align: center; margin-top: 20px;">
-    <div class="card" style="background-color: powderblue; border: 3px solid grey;">
-      <div class="card-block">
-        <h3 class="card-title"><strong><%= brewery.name %></strong></h3>
-
-        <% img_url = WhatsHoppin.Locations.get_brewery_image_medium(brewery) %>   
-        <% img_url = if img_url == "" do static_path(@conn, "/images/beer_icon.png") else img_url end %>
-        <div class="container">
-          <div class="thumbnail">
-            <img class="" style="height: 150px; width: 150px; border: 1px blue;" 
-            src="<%= img_url %>" 
-            width="150" height="150">
+          <div class="container">
+            <div class="thumbnail">
+              <img class="default-image mb-3" src="<%= img_url %>" width="150" height="150">
+            </div>
           </div>
+          <p class="card-text"><%= "(#{brewery.city})" %></p>
+          <p class="mb-2">
+            <%= link "View Brewery",
+                to: brewery_path(@conn, :show, brewery),
+                class: "btn btn-primary" %></p>
         </div>
-        <p class="card-text"><%= "(#{brewery.city})" %></p>
-        <p style="margin-bottom: 10px;"><%= link "View Brewery", to: brewery_path(@conn, :show, brewery), class: "btn btn-primary" %></p>
       </div>
     </div>
-  </div>
- <% end %>
- </div> <%# row %>
-
-<div class="row" style="margin-top: 20px;">
-  <span><%= link "Browse By State", to: state_path(@conn, :index) %></span>
-</div>
+   <% end %>
+ </div>
