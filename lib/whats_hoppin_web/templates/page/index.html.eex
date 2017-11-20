@@ -6,9 +6,11 @@
   <h4 class="text-muted">...</h4>
 
   <% brewery = WhatsHoppin.Locations.get_random_brewery() %>
+  <% img_url = WhatsHoppin.Locations.get_brewery_image_medium(brewery) %>   
+  <% if img_url == "" do img_url = static_path(@conn, "/images/beer_icon.png") end %>
 
   <h3><strong><%= brewery.name %></strong></h3>
-  <img src="<%= WhatsHoppin.Locations.get_brewery_image_medium(brewery) %>" height="175" width="175">
+  <img src="<%= img_url %>" height="175" width="175">
   <h3 class="text-muted" style="margin-bottom: 25px">
     <strong><%= "(#{brewery.city}, #{brewery.state})" %></strong>
   </h3>
