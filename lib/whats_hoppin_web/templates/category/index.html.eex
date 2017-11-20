@@ -8,7 +8,7 @@
       <div class="card-block">
         <h3 class="card-title"><strong><%= c.name %></strong></h3>
         <p class="card-text">
-          <strong>Number of Beers: <%= WhatsHoppin.Beer.format_category_number_of_beers_display(c) %></strong>
+          <strong>Beers in Category: <%= WhatsHoppin.Beer.format_category_number_of_beers_display(c) %></strong>
         </p>
         <p style="margin-bottom: 10px;"><%= link "View Styles", to: category_path(@conn, :show, c), class: "btn btn-primary" %></p>
       </div>
