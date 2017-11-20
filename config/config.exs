@@ -63,8 +63,9 @@ config :whats_hoppin,
 
 # Configures the endpoint
 config :whats_hoppin, WhatsHoppinWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "whatshoppin.anthonygreen17.com", port: 7878],
   secret_key_base: "Yxe5Ke1Su6L1oHYj8yWm9DYh+qMl4oy+maPaWORnysRQm7MsXZ2QPFso4+M1TWub",
+  check_origin: false,
   render_errors: [view: WhatsHoppinWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: WhatsHoppin.PubSub,
            adapter: Phoenix.PubSub.PG2]
