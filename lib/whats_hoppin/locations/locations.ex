@@ -7,6 +7,7 @@ defmodule WhatsHoppin.Locations do
   alias WhatsHoppin.Repo
 
   alias WhatsHoppin.Locations.Brewery
+  alias WhatsHoppin.Locations.State
 
 
   def get_brewery_image_medium(%{medium_pic_url: med, large_pic_url: lrg}) do
@@ -29,6 +30,10 @@ defmodule WhatsHoppin.Locations do
     |> length
     |> :rand.uniform
     |> (fn(num) -> Enum.at(breweries, num) end).()
+  end
+
+  def state_from_brewery(%{state: state}) do
+    Repo.get_by(State, name: state)
   end
 
   @doc """
@@ -130,7 +135,6 @@ defmodule WhatsHoppin.Locations do
     Brewery.changeset(brewery, %{})
   end
 
-  alias WhatsHoppin.Locations.State
 
   @doc """
   Returns the list of states.

@@ -1,3 +1,7 @@
+<% assoc_cat = WhatsHoppin.Beer.category_from_style(@style) %>
+<%= link "Back (" <> assoc_cat.name <> ")",
+    to: category_path(@conn, :show, assoc_cat) %> 
+
 <div class="center">
   <h2 id="forum-name" class="center" data-forum-id="<%= @style.styleId %>"><%= @style.name %></h2>
   <div class="container">

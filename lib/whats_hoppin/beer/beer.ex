@@ -32,7 +32,7 @@ defmodule WhatsHoppin.Beer do
 
   def get_beers_in_style_parallel(%{styleId: styleId, number_beer_pages: num_pages}) do
     num_pages = 
-    if num_pages >= 17 do 17 else num_pages end
+    if num_pages >= 15 do 15 else num_pages end
 
     parallel_map 1..num_pages, fn page_num ->
       get_beers_with_style(styleId, page_num)
@@ -46,6 +46,11 @@ defmodule WhatsHoppin.Beer do
   defp format_number_of_beers_display(num_beer_pages) do
     "~#{num_beer_pages * 50}"
   end
+
+  def category_from_style(%{category_id: cId}) do
+    Repo.get_by(Category, category_id: cId)
+  end
+
 
   def format_style_number_of_beers_display(%{number_beer_pages: num_beer_pages}) do
     format_number_of_beers_display(num_beer_pages)
