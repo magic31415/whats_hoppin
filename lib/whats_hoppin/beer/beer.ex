@@ -31,8 +31,8 @@ defmodule WhatsHoppin.Beer do
   end
 
   def get_beers_in_style_parallel(%{styleId: styleId, number_beer_pages: num_pages}) do
-    # num_pages = 
-    # if num_pages >= 10 do 10 else num_pages end
+    num_pages = 
+    if num_pages >= 17 do 17 else num_pages end
 
     parallel_map 1..num_pages, fn page_num ->
       get_beers_with_style(styleId, page_num)
