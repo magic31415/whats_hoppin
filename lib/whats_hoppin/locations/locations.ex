@@ -16,6 +16,14 @@ defmodule WhatsHoppin.Locations do
     end
   end
 
+  def get_random_brewery() do
+    breweries = list_breweries()
+    breweries
+    |> length
+    |> :rand.uniform
+    |> (fn(num) -> Enum.at(breweries, num) end).()
+  end
+
   @doc """
   Returns the list of breweries.
 

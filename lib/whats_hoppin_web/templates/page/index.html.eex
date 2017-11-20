@@ -1,14 +1,21 @@
 <div class="jumbotron center">
   <h2 class="display-1">WhatsHoppin?</h2>
   <p class="lead display-4">Join the conversation with other beer lovers!</p>
-  <p class="display-1">
-  	<img src="https://s3.amazonaws.com/brewerydbapi/brewery/7EhKvb/upload_fiHFSq-squareMedium.png">
-  	<img src="https://s3.amazonaws.com/brewerydbapi/brewery/umzSBk/upload_JXtYcm-squareMedium.png">
-  	<img src="https://s3.amazonaws.com/brewerydbapi/brewery/iA45eM/upload_nZZ1UE-squareMedium.png">
-  </p>
-  <p class="display-4">Log in above or <%= link "sign up", to: user_path(@conn, :new) %>
-  <p class="display-4">or search for a
-  	                   <%= link "style", to: category_path(@conn, :index) %> or a
-  	                   <%= link "brewery", to: state_path(@conn, :index) %>.
+  <h4 class="text-muted">...</h4>
+  <h5 class="text-muted"><strong>Random brewery generator says...</strong></h4>
+  <h4 class="text-muted">...</h4>
+
+  <% brewery = WhatsHoppin.Locations.get_random_brewery() %>
+
+  <h3><strong><%= brewery.name %></strong></h3>
+  <img src="<%= WhatsHoppin.Locations.get_brewery_image_medium(brewery) %>" height="175" width="175">
+  <h3 class="text-muted" style="margin-bottom: 25px">
+    <strong><%= "(#{brewery.city}, #{brewery.state})" %></strong>
+  </h3>
+
+  <p class="display-4">Log in above or <%= link "Sign Up", to: user_path(@conn, :new) %>,</p>
+  <p class="display-4">or browse
+  	                   <%= link "Beer Categories", to: category_path(@conn, :index) %> or
+  	                   <%= link "Breweries", to: state_path(@conn, :index) %>.
   </p>
 </div>
