@@ -1,3 +1,8 @@
+<% assoc_state = WhatsHoppin.Locations.state_from_brewery(@brewery) %>
+
+<%= link "Back (Breweries in #{assoc_state.name})",
+    to: state_path(@conn, :show, assoc_state) %> 
+
 <div class="center">
   <h2 id="forum-name" class="center" data-forum-id="<%= @brewery.brewery_id %>">
       <%= link @brewery.name, to: @brewery.website %>
@@ -8,7 +13,7 @@
       <img class="" src="<%= @brewery.large_pic_url %>" alt="" width="300" height="300">
     </div>
   </div>
-  <p class="text-muted left"><%= @brewery.desc%></p>
+  <p class="text-muted center"><%= @brewery.desc%></p>
   <h4>
     <strong>Est. </strong><%= @brewery.established_date %>
   </h4>
