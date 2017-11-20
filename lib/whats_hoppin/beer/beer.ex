@@ -12,7 +12,7 @@ defmodule WhatsHoppin.Beer do
   ##############################################################################
   # Taken from Nat Tuck's lecture notes about asynchronous operations using Task
   ##############################################################################
-  
+
   defp parallel_map(xs, op) do
     tasks = Enum.map xs, fn x ->
       Task.async(fn -> op.(x) end)
@@ -44,10 +44,7 @@ defmodule WhatsHoppin.Beer do
   ################################################
 
   defp format_number_of_beers_display(num_beer_pages) do
-    case num_beer_pages do
-      1 -> "< 50"
-      _ -> "#{(num_beer_pages - 1) * 50} - #{num_beer_pages * 50}"
-    end
+    "~#{num_beer_pages * 50}"
   end
 
   def format_style_number_of_beers_display(%{number_beer_pages: num_beer_pages}) do
