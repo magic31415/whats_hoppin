@@ -16,6 +16,13 @@ defmodule WhatsHoppin.Locations do
     end
   end
 
+  def format_brewery_location(%{city: city, state: state}) do
+    case city do
+      "" -> "(#{state})"
+      _  -> "(#{city}, #{state})"
+    end
+  end
+
   def get_random_brewery() do
     breweries = list_breweries()
     breweries
