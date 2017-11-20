@@ -42,6 +42,7 @@ defmodule WhatsHoppinWeb do
       import WhatsHoppinWeb.Router.Helpers
       import WhatsHoppinWeb.ErrorHelpers
       import WhatsHoppinWeb.Gettext
+      import WhatsHoppinWeb.Helpers
     end
   end
 

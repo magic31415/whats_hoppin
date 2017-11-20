@@ -1,6 +1,5 @@
 Hide secrets from GitHub
 Favorites for users
-Buy a domain?
 Find examples of beers with missing ABV and IBU parts
 
 Get rid of all controller actions / templates / views / routes that we dont need
@@ -12,7 +11,10 @@ number of people talking about this -- need users
 certificate
 breweries page cards not uniform
 clean up brewey show page
-share partial across models
 style 1 and brewery 1 bleeding?
 international
-front-end form validation
+test login attempts
+sign up logs you in / delete logs you out
+blank mouseover descriptions
+no beers = no messages and box is always in wrong place
+cant add buttons back to edit/delete

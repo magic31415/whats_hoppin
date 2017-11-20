@@ -8,28 +8,35 @@
   <div class="form-group">
     <%= label f, :username, class: "control-label" %>
     <%= text_input f, :username, class: "form-control" %>
+    <span class="error-text" id="username-front-validation"></span>
     <span class="error-text"><%= error_tag f, :username %></span>
   </div>
 
   <div class="form-group">
     <%= label f, :email, class: "control-label" %>
     <%= text_input f, :email, class: "form-control" %>
+    <span class="error-text" id="email-front-validation"></span>
     <span class="error-text"><%= error_tag f, :email %></span>
   </div>
 
   <div class="form-group">
     <%= label f, :password, class: "control-label" %>
     <%= password_input f, :password, class: "form-control" %>
+    <span class="error-text" id="password-front-validation"></span>
     <span class="error-text"><%= error_tag f, :password %></span>
   </div>
 
   <div class="form-group">
     <%= label f, :password_confirmation, class: "control-label" %>
     <%= password_input f, :password_confirmation, class: "form-control" %>
+    <span class="error-text" id="confirmation-front-validation"></span>
     <span class="error-text"><%= error_tag f, :password_confirmation %></span>
   </div>
 
   <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+    <%= link "Cancel", to: page_path(@conn, :index), class: "btn btn-secondary" %>
+    <%= submit "Create Account", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<%# TODO back button %>

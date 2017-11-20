@@ -1,8 +1,6 @@
 defmodule WhatsHoppinWeb.CategoryController do
   use WhatsHoppinWeb, :controller
-
   alias WhatsHoppin.Beer
-  alias WhatsHoppin.Beer.Category
 
   def index(conn, _params) do
     categories = Beer.list_categories()

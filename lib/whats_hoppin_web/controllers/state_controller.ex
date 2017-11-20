@@ -1,8 +1,6 @@
 defmodule WhatsHoppinWeb.StateController do
   use WhatsHoppinWeb, :controller
-
   alias WhatsHoppin.Locations
-  alias WhatsHoppin.Locations.State
 
   def index(conn, _params) do
     states = Enum.sort(Locations.list_states())

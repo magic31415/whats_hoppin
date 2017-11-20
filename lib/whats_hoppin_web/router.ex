@@ -1,5 +1,6 @@
 defmodule WhatsHoppinWeb.Router do
   use WhatsHoppinWeb, :router
+  import WhatsHoppinWeb.Plugs
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -7,10 +8,13 @@ defmodule WhatsHoppinWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_user
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
+    plug :fetch_user
   end
 
   scope "/", WhatsHoppinWeb do
@@ -26,6 +30,9 @@ defmodule WhatsHoppinWeb.Router do
 
     # TODO which resources
     resources "/users", UserController
+
+    post "/sessions", SessionController, :login
+    delete "/sessions", SessionController, :logout
   end
 
   # Other scopes may use custom stacks.

@@ -7,7 +7,7 @@ defmodule WhatsHoppin.Forum.User do
   schema "users" do
     field :email, :string
     field :username, :string
-    has_many :messages, Forum.message
+    has_many :messages, Forum.Message
 
     field :password_hash, :string
     field :pw_last_try, :utc_datetime
@@ -40,9 +40,13 @@ defmodule WhatsHoppin.Forum.User do
   end
 
   def valid_username?(username) do
-    case String.length(username) <= 20 && Forum.get_user_by_username(username) == nil do
-      {:ok, _} -> username
-      _else -> {:error, "Username is too long or already in use"} # TODO separate
+    cond do
+      String.length(username) > 20 ->
+        {:error, "Username is too long"}
+      Forum.get_user_by_username(username) != nil ->
+        {:error, "Username is already in use"}
+      true ->
+        {:ok, username}
     end
   end
 
@@ -56,16 +60,16 @@ defmodule WhatsHoppin.Forum.User do
   end
 
   def valid_email?(email) do
-    # Regex from https://www.regextester.com/19, TODO cleaner
-    email_regex = ~r/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9]
-                     (?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9]
-                     (?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-    
-    case String.length(email) <= 100
-      && Regex.match?(email_regex, email)
-      && Forum.get_user_by_email(email) == nil do
-      {:ok, _} -> email
-      _else -> {:error, "Email address invalid or already in use"} # TODO separate
+    # Regex from https://gist.github.com/mgamini/4f3a8bc55bdcc96be2c6
+    cond do
+      String.length(email) > 100 ->
+        {:error, "Email address is too long"}
+      not Regex.match?(~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/, email) ->
+        {:error, "Invalid email address"}
+      Forum.get_user_by_email(email) != nil ->
+        {:error, "Email address already in use"}
+      true ->
+        {:ok, email}
     end
   end
 
@@ -90,8 +94,8 @@ defmodule WhatsHoppin.Forum.User do
   end
   def valid_password?(_), do: {:error, "The password is too short"}
 
-  def get_and_auth_user(email, password) do
-    user = Forum.get_user_by_email(email)
+  def get_and_auth_user(username, password) do
+    user = Forum.get_user_by_username(username)
     case user != nil && throttle_attempts(user) && Comeonin.Argon2.check_pass(user, password) do
       {:ok, user} -> user
       _else       -> nil

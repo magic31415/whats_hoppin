@@ -8,7 +8,7 @@ defmodule WhatsHoppin.Forum.Message do
   schema "messages" do
     field :content, :string
     field :forum_id, :string
-    # belongs_to :user, Forum.User
+    belongs_to :user, Forum.User
 
     timestamps()
   end

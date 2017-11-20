@@ -57,8 +57,9 @@ defmodule WhatsHoppin.Beer do
     |> format_number_of_beers_display
   end
 
+  # TODO I already do some of this
   def format_beer_description(beer) do
-    failStr = "No description available."
+    
     desc = 
     case d = Map.get(beer, "description") do
       nil -> "No description available."

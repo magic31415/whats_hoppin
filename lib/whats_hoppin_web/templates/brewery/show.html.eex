@@ -1,8 +1,5 @@
-<%# TODO probably not secure %>
-<div id="is-forum" data-is-forum="true" hidden></div> 
-
 <div class="center">
-  <h2 id="forum-name" class="center"> data-forum-id="<%= @brewery.brewery_id %>">
+  <h2 id="forum-name" class="center" data-forum-id="<%= @brewery.brewery_id %>">
       <%= link @brewery.name, to: @brewery.website %>
       <span class="text-muted"><%= "(#{@brewery.city}, #{@brewery.state})" %></span>
   </h2>
@@ -42,15 +39,17 @@
     <div class="col-8">
 
       <%# Form for posting a message %>
-      <div class="form-group mt-5">
-        <textarea class="form-control"
-                  id="new-message-content"
-                  placeholder="What do you think of this brewery?"></textarea>
-      </div>
-      <div><%= link "Post To Forum", to: "#a",
-                                     class: "btn btn-primary submit-button mb-5",
-                                     id: "submit-button",
-                                     data_forum_id: @brewery.id %></div>
+      <%= if @current_user do %>
+        <div class="form-group mt-5">
+          <textarea class="form-control"
+                    id="new-message-content"
+                    placeholder="What do you think of this brewery?"></textarea>
+        </div>
+        <div><%= link "Post To Forum", to: "#a",
+                                       class: "btn btn-primary submit-button mb-5",
+                                       id: "submit-button",
+                                       data_forum_id: @brewery.id %></div>
+      <% end %>
 
       <%# Messages %>
       <div class="row">
@@ -60,17 +59,22 @@
               <tbody id="messages-table-body">
               <%= for message <- @messages do %>
                 <tr id="message-<%= message.id %>">
-                  <td id="content-<%= message.id %>"><%= message.content %></td>
-                  <td class="text-right">
-                    <span><%= link "Edit",
-                              to: "#a",
-                              class: "btn btn-outline-warning btn-xs edit-button",
-                              id: "edit-#{message.id}" %></span>
-                    <span><%= link "Delete",
-                              to: "#a",
-                              class: "btn btn-danger btn-xs delete-button",
-                              id: "delete-#{message.id}" %></span>
+                  <td id="content-<%= message.id %>">
+                    <strong><%= WhatsHoppin.Forum.get_user!(message.user_id).username %>: </strong>
+                    <%= message.content %>  
                   </td>
+                  <%= if @current_user != nil && @current_user.id == message.user_id do %>
+                    <td class="text-right">
+                      <span><%= link "Edit",
+                                to: "#a",
+                                class: "btn btn-outline-warning btn-xs edit-button",
+                                id: "edit-#{message.id}" %></span>
+                      <span><%= link "Delete",
+                                to: "#a",
+                                class: "btn btn-danger btn-xs delete-button",
+                                id: "delete-#{message.id}" %></span>
+                    </td>
+                  <% end %>
                 </tr>
               <% end %>
               </tbody>

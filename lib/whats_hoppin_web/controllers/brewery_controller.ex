@@ -4,7 +4,7 @@ defmodule WhatsHoppinWeb.BreweryController do
   alias WhatsHoppin.Locations
   alias WhatsHoppin.Beer
   alias WhatsHoppin.Forum
-
+  
   def show(conn, %{"id" => id}) do
     brewery = Locations.get_brewery!(id)
     beers = Beer.get_beers_within_brewery(brewery.brewery_id)

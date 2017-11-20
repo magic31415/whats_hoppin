@@ -4,9 +4,13 @@ defmodule WhatsHoppinWeb.UserController do
   alias WhatsHoppin.Forum
   alias WhatsHoppin.Forum.User
 
-  def index(conn, _params) do
-    users = Forum.list_users()
-    render(conn, "index.html", users: users)
+  def set_current_user(conn, _params) do
+    WhatsHoppinWeb.Plugs.fetch_user(conn, _params).assigns.current_user
+  end
+
+  def not_logged_in(conn) do
+    conn
+    |> redirect(to: category_path(conn, :index)) # TODO
   end
 
   def new(conn, _params) do
@@ -19,16 +23,16 @@ defmodule WhatsHoppinWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
-        |> redirect(to: user_path(conn, :show, user))
+        |> redirect(to: page_path(conn, :index))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    user = Forum.get_user!(id)
-    render(conn, "show.html", user: user)
-  end
+  # def show(conn, %{"id" => id}) do
+  #   user = Forum.get_user!(id)
+  #   render(conn, "show.html", user: user)
+  # end
 
   def edit(conn, %{"id" => id}) do
     user = Forum.get_user!(id)
@@ -43,18 +47,18 @@ defmodule WhatsHoppinWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: user_path(conn, :show, user))
+        |> redirect(to: page_path(conn, :index))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    user = Forum.get_user!(id)
-    {:ok, _user} = Forum.delete_user(user)
+  # def delete(conn, %{"id" => id}) do
+  #   user = Forum.get_user!(id)
+  #   {:ok, _user} = Forum.delete_user(user)
 
-    conn
-    |> put_flash(:info, "User deleted successfully.")
-    |> redirect(to: user_path(conn, :index))
-  end
+  #   conn
+  #   |> put_flash(:info, "User deleted successfully.")
+  #   |> redirect(to: user_path(conn, :index))
+  # end
 end
