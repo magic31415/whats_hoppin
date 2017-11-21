@@ -132,6 +132,44 @@ defmodule WhatsHoppin.Forum do
   end
 
   @doc """
+  Get a timestamp for the message that looks something like:
+
+                10/3/2017, 12:58:57 A.M.
+
+  """
+  def get_message_timestamp(id) do
+    ua = get_message!(id).inserted_at
+
+    am_or_pm = if (ua.hour >= 12) do "P.M." else "A.M." end
+    hour = cond do
+      ua.hour == 0
+        -> "12"
+      ua.hour <= 9
+        -> (["0", to_string(ua.hour)]) |> Enum.join("")
+      ua.hour <= 12
+        -> to_string(ua.hour)
+      ua.hour <= 21
+        -> (["0", to_string(ua.hour - 12)]) |> Enum.join("")
+      true
+        -> to_string(ua.hour - 12)
+    end
+
+    pad_func = fn (t) -> 
+      cond do
+        t <= 9
+          -> (["0", to_string(t)]) |> Enum.join("")
+        true
+          -> to_string(t)
+      end
+    end
+
+    ["posted at ", pad_func.(ua.month), "/", pad_func.(ua.day), "/", to_string(ua.year),
+     ", ", hour, ":", pad_func.(ua.minute), ":", pad_func.(ua.second), " ",
+    am_or_pm]
+    |> Enum.join("")
+  end
+
+  @doc """
   Gets a single user.
 
   Raises `Ecto.NoResultsError` if the User does not exist.

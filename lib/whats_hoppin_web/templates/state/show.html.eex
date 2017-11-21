@@ -18,12 +18,11 @@
             </div>
           </div>
           <p class="card-text"><%= "(#{brewery.city})" %></p>
-          <p class="mb-2">
-            <%= link "View Brewery",
-                to: brewery_path(@conn, :show, brewery),
-                class: "btn btn-primary" %></p>
+          <p class="mb-2 align-text-bottom">
+            <%= link "View Brewery", to: brewery_path(@conn, :show, brewery), class: "btn btn-primary" %>
+          </p>
         </div>
       </div>
     </div>
-   <% end %>
- </div>
+  <% end %>
+</div>

@@ -43,11 +43,8 @@ function channel_init() {
 
 $(channel_init);
 
-// TODO simplify
 function add_event_listeners(id) {
 	let messages = id ? $("#message-" + id) : $("[id^=message-]");
-	// let edit_buttons = Array.from(messages.find("a.edit-button"));
-	// let delete_buttons = Array.from(messages.find("a.delete-button"));
 
 	for (let i = 0; i < messages.length; i++) {
 		let message_id = messages[i].id.substring(8);
@@ -84,23 +81,23 @@ function got_create(msg) {
 		
 		if(msg.user_id == current_user_id) {
 			buttons =
-			'<td class="text-right"> \
-		  	<span><a href="#a" \
-		  					 class="btn btn-outline-warning btn-xs edit-button" \
-		  					 id="edit-' + msg.id + '">Edit</a></span> \
-		  	<span><a href="#a" \
-		  					 class="btn btn-danger btn-xs delete-button" \
-		  					 id="delete-' + msg.id + '">Delete</a></span> \
+			'<td class="pl-0"> \
+		  	<a href="#a" class="edit-button" id="edit-' + msg.id + '">Edit</a> \
+		  </td> \
+		  <td> \
+		  	<a href="#a" class="delete-button" id="delete-' + msg.id + '">Delete</a> \
 		  </td>';
 		}
 
 	 	let message_row =
-			'<tr id="message-' + msg.id + '"> \
-			  <td id="author-' + msg.id + '"><strong>' + msg.username + ': </strong>' + 
-	  		'<td id="content-' + msg.id + '">' + msg.content + '</td>' +
+			'<tr class="message-row" id="message-' + msg.id + '"> \
+			  <td id="author-' + msg.id + '"><strong>' + msg.username + ' </strong></td> \
+			  <td id="content-td-' + msg.id + '"> \
+			    <div id="content-' + msg.id + '">' + msg.content + '</div> \
+			    <div id="timestamp-' + msg.id + '" class="timestamp mt-3">' + msg.timestamp + '</div> \
+			  </td>' +
 	  			buttons +
-	  		'</td> \
-	  	</tr>';
+	  	'</tr>';
 
 		$('tbody#messages-table-body').prepend(message_row);
 		add_event_listeners(msg.id);
@@ -110,19 +107,14 @@ function got_create(msg) {
 // EDIT
 function edit_message(id) {
 	return function() {
-		let message = $("#message-" + id);
-		let author = $("#author-" + id);
+		let content_td = $("#content-td-" + id)
 		let content = $("#content-" + id);
 		let edit_button = $("#edit-" + id);
 
 		if(edit_button.text() === "Edit") {
-			let input = '<td> \
-										<input type="text" id="content-' + id + '" value="' + content.text() + '"> \
-									</td>';
-			author.remove();
-			content.remove();
-			message.prepend(input);
-			message.prepend(author);
+			let input = '<div><input type="text" id="content-' + id + '" value="' + content.text() + '"></div>'
+			content.remove()
+			content_td.prepend(input);
 			edit_button.text('Update');
 		}
 		else {
@@ -131,10 +123,8 @@ function edit_message(id) {
 			chan.push("update", {id: id,
 			                     content: content_text,
 			                     forum_id: subtopic});
-			author.remove();
-			content.parent().remove();
-			message.prepend('<td id="content-' + id + '">' + content_text + '</td>');
-			message.prepend(author);
+			content_td.children()[0].remove();
+			content_td.prepend('<div id="content-' + id + '">' + content_text + '</div>');
 		}
 	};
 }

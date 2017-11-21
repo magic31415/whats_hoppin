@@ -37,3 +37,29 @@
 #username {
 	color: green;
 }
+
+.message-row {
+	border: 3px solid green;
+}
+
+.timestamp {
+	color: grey;
+}
+
+.edit-button {
+	color: #F1C40F;
+}
+
+.delete-button {
+	color: red;
+}
+
+/* from https://stackoverflow.com/questions/35933317/
+        how-do-i-make-footer-line-up-at-the-bottom-of-bootstrap-cards-component 
+   not currently working */
+.view-brewery {
+	position: absolute;
+  bottom: 3px;
+  left: 24.9px;
+  width: 80%;
+}
