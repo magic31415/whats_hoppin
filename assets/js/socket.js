@@ -84,7 +84,7 @@ function got_create(msg) {
 			'<td class="pl-0"> \
 		  	<a href="#a" class="edit-button" id="edit-' + msg.id + '">Edit</a> \
 		  </td> \
-		  <td> \
+		  <td class="pl-0"> \
 		  	<a href="#a" class="delete-button" id="delete-' + msg.id + '">Delete</a> \
 		  </td>';
 		}
